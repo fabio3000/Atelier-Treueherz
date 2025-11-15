@@ -3,22 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atelier Treueherz | Premium Tierportraits aus Deutschland</title>
+    <title>Atelier Treueherz | Einzigartige Erinnerungen für Hundemamas</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Playfair+Display:wght@600;700&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
-        /* --- CSS VARIABLES & RESET --- */
+        /* --- NEUE FARBWELT: WARM, HERZLICH, WEIBLICH (40-60J) --- */
         :root {
-            --primary-color: #2C3E50;
-            --accent-color: #C5A059;
-            --bg-color: #F9F7F2;
-            --text-color: #333333;
+            --primary-color: #5D5C61; /* Warmes Dunkelgrau statt hartes Blau */
+            --accent-color: #D68C8C; /* Altrosa / Dusty Rose - sehr beliebt! */
+            --highlight-color: #9EBC9F; /* Salbei-Grün für Natürlichkeit */
+            --bg-color: #FDFBF7; /* Weiches Creme-Weiß */
+            --text-color: #4a4a4a;
             --white: #ffffff;
+            --gold: #C5A059; /* Bleibt als Akzent */
         }
 
         * {
@@ -28,18 +30,25 @@
         }
 
         body {
-            font-family: 'Lato', sans-serif;
+            font-family: 'Nunito', sans-serif; /* Rundere, freundliche Schrift */
             background-color: var(--bg-color);
             color: var(--text-color);
             line-height: 1.6;
         }
 
-        h1, h2, h3, h4 {
+        /* Überschriften Mix */
+        h1, h2, h3 {
             font-family: 'Playfair Display', serif;
             color: var(--primary-color);
         }
 
-        /* WICHTIG: Globale Bild-Regel */
+        /* Die "Handschrift" für emotionale Keywords */
+        .handwritten {
+            font-family: 'Dancing Script', cursive;
+            color: var(--accent-color);
+            font-weight: 700;
+        }
+
         img {
             max-width: 100%;
             height: auto;
@@ -52,37 +61,42 @@
             transition: 0.3s;
         }
 
-        /* --- BUTTONS --- */
+        /* --- BUTTONS: Weicher und runder --- */
         .btn {
             display: inline-block;
-            padding: 12px 30px;
-            font-size: 1rem;
+            padding: 14px 35px;
+            font-size: 1.1rem;
             font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            text-transform: none; /* Nicht mehr alles Großbuchstaben */
             border: none;
+            border-radius: 50px; /* Pillen-Form ist freundlicher */
             cursor: pointer;
+            box-shadow: 0 4px 15px rgba(214, 140, 140, 0.3);
             transition: all 0.3s ease;
         }
 
         .btn-primary {
-            background-color: var(--primary-color);
+            background-color: var(--accent-color);
             color: var(--white);
         }
 
         .btn-primary:hover {
-            background-color: var(--accent-color);
-            transform: translateY(-2px);
+            background-color: #c07070;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(214, 140, 140, 0.5);
         }
 
         .btn-outline {
-            border: 2px solid var(--primary-color);
-            color: var(--primary-color);
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
             background: transparent;
+            border-radius: 50px;
+            padding: 10px 25px;
+            font-size: 0.95rem;
         }
 
         .btn-outline:hover {
-            background-color: var(--primary-color);
+            background-color: var(--accent-color);
             color: var(--white);
         }
 
@@ -91,9 +105,9 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.5rem 5%;
+            padding: 1rem 5%;
             background-color: var(--white);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.03);
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -101,9 +115,14 @@
 
         .logo {
             font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: 700;
             color: var(--primary-color);
+        }
+
+        .logo i {
+            color: var(--accent-color);
+            margin-right: 5px;
         }
 
         .logo span {
@@ -116,9 +135,8 @@
         }
 
         .nav-links a {
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            font-size: 1rem;
+            font-weight: 600;
         }
 
         .nav-links a:hover {
@@ -131,7 +149,8 @@
             flex-direction: column-reverse;
             padding: 4rem 5%;
             align-items: center;
-            gap: 2rem;
+            gap: 3rem;
+            background: linear-gradient(to bottom, #fff, #FDFBF7);
         }
 
         .hero-text {
@@ -139,71 +158,86 @@
         }
 
         .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
+            font-size: 2.8rem;
+            margin-bottom: 1.2rem;
             line-height: 1.2;
         }
 
         .hero p {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             margin-bottom: 2rem;
             color: #666;
         }
 
-        /* BILD ANPASSUNG HERO */
+        /* Bildanpassung Hero */
         .hero-image {
             width: 100%;
-            max-width: 600px; 
+            max-width: 550px;
+            position: relative;
+        }
+        
+        /* Dekoratives Element hinter dem Bild (ein Kreis) */
+        .hero-image::before {
+            content: '';
+            position: absolute;
+            width: 90%;
+            height: 90%;
+            background-color: rgba(214, 140, 140, 0.15); /* Zartes Rosa */
+            border-radius: 50%;
+            z-index: -1;
+            top: -20px;
+            right: -20px;
         }
 
         .hero-image img {
             width: 100%;
             height: auto; 
-            border-radius: 4px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-radius: 20px; /* Weiche Ecken */
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
         }
 
-        /* --- TRUST BADGES --- */
+        /* --- TRUST BAR (Jetzt mit Herzchen) --- */
         .trust-bar {
             background-color: var(--white);
             padding: 2rem 5%;
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 3rem;
-            border-top: 1px solid #eee;
-            border-bottom: 1px solid #eee;
+            gap: 2rem;
+            border-top: 1px dashed #e0d0d0; /* Gestrichelte Linie wirkt handgemacht */
+            border-bottom: 1px dashed #e0d0d0;
         }
 
         .trust-item {
             display: flex;
             align-items: center;
             gap: 10px;
-            font-size: 0.9rem;
+            font-size: 1rem;
             font-weight: 700;
             color: var(--primary-color);
         }
 
         .trust-item i {
-            color: var(--accent-color);
-            font-size: 1.2rem;
+            color: var(--highlight-color); /* Salbei Grün */
+            font-size: 1.3rem;
         }
 
-        /* --- PRODUCTS / STYLES --- */
+        /* --- PRODUCTS --- */
         .products {
             padding: 5rem 5%;
             text-align: center;
         }
 
         .section-title {
-            font-size: 2rem;
-            margin-bottom: 1rem;
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
         }
 
         .section-subtitle {
             color: #777;
             margin-bottom: 3rem;
-            max-width: 600px;
+            font-size: 1.1rem;
+            max-width: 700px;
             margin-left: auto;
             margin-right: auto;
         }
@@ -211,31 +245,33 @@
         .product-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            gap: 2.5rem;
         }
 
         .product-card {
             background: var(--white);
-            padding: 1rem;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.04);
             transition: 0.3s;
             display: flex;
-            flex-direction: column; 
+            flex-direction: column;
             height: 100%;
+            border: 1px solid #f0f0f0;
         }
 
         .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(214, 140, 140, 0.15);
+            border-color: var(--accent-color);
         }
 
-        /* BILD ANPASSUNG PRODUKTE */
+        /* Bildanpassung Produkte */
         .product-image {
-            height: 350px; /* Feste Höhe erzwingen */
+            height: 320px;
             width: 100%;
-            background-color: #ddd;
-            margin-bottom: 1.5rem;
-            overflow: hidden;
+            background-color: #f4f4f4;
+            margin-bottom: 1rem;
             position: relative;
         }
         
@@ -244,40 +280,64 @@
             height: 100%;
             object-fit: cover;
             object-position: center;
-            transition: transform 0.5s ease;
+            transition: transform 0.8s ease;
         }
 
         .product-card:hover .product-image img {
-            transform: scale(1.05);
+            transform: scale(1.08);
+        }
+        
+        .product-content {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
         }
 
         .product-card h3 {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             margin-bottom: 0.5rem;
         }
         
         .product-card p {
             flex-grow: 1;
             margin-bottom: 1rem;
+            color: #666;
+            font-size: 0.95rem;
         }
 
         .price {
             display: block;
-            font-family: 'Lato', sans-serif;
-            color: var(--accent-color);
-            font-weight: 700;
-            font-size: 1.2rem;
+            color: var(--primary-color);
+            font-weight: 800;
+            font-size: 1.3rem;
             margin-bottom: 1rem;
         }
 
-        /* --- CHARITY SECTION --- */
+        /* Badge für Bestseller */
+        .badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: var(--white);
+            color: var(--accent-color);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 800;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            z-index: 2;
+        }
+
+        /* --- CHARITY --- */
         .charity {
-            background-color: #E8E4DD;
+            background-color: #EFEBE9; /* Warmes Taupe */
             padding: 5rem 5%;
             display: flex;
             flex-wrap: wrap;
             align-items: center;
-            gap: 3rem;
+            gap: 4rem;
+            border-radius: 0 0 50px 50px; /* Verspielter Abschluss */
         }
 
         .charity-content, .charity-img {
@@ -285,16 +345,19 @@
             min-width: 300px;
         }
 
-        /* BILD ANPASSUNG CHARITY */
+        /* Bildanpassung Charity */
         .charity-img {
             height: 400px;
+            position: relative;
         }
 
         .charity-img img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 4px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 5px solid var(--white); /* Weißer Fotorahmen-Look */
         }
 
         .charity-content h2 {
@@ -302,34 +365,36 @@
         }
 
         .charity-content p {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
+            font-size: 1.05rem;
         }
 
         /* --- FOOTER --- */
         footer {
             background-color: var(--primary-color);
             color: var(--white);
-            padding: 3rem 5%;
+            padding: 4rem 5% 2rem;
             text-align: center;
         }
 
-        /* Hier ist die spezielle Anpassung für die Goldene Umrandung */
         footer .logo {
-            /* Textfarbe ist dunkel (identisch zum HG) */
-            color: var(--primary-color);
-            
-            /* Erzeugt eine goldene Umrandung um das Wort 'Atelier' */
+            font-size: 2rem;
+            color: var(--primary-color); 
+            /* Die Goldene Umrandung (behalten wir, wirkt edel) */
             text-shadow: 
-                -1px -1px 0 var(--accent-color),  
-                 1px -1px 0 var(--accent-color),
-                -1px  1px 0 var(--accent-color),
-                 1px  1px 0 var(--accent-color);
+                -1px -1px 0 var(--gold),  
+                 1px -1px 0 var(--gold),
+                -1px  1px 0 var(--gold),
+                 1px  1px 0 var(--gold);
+            margin-bottom: 1rem;
+            display: inline-block;
         }
-
-        /* Damit 'Treueherz' normal gold bleibt und keine Umrandung bekommt */
+        
         footer .logo span {
-            color: var(--accent-color);
+            color: var(--gold);
             text-shadow: none;
+            font-family: 'Dancing Script', cursive; /* Auch hier Handschrift */
+            font-size: 2.2rem;
         }
 
         .footer-links {
@@ -337,9 +402,14 @@
         }
         
         .footer-links a {
-            color: #ccc;
-            margin: 0 10px;
-            font-size: 0.9rem;
+            color: #d0d0d0;
+            margin: 0 15px;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent-color);
         }
 
         /* --- RESPONSIVE --- */
@@ -347,14 +417,14 @@
             .hero {
                 flex-direction: row;
                 text-align: left;
-                min-height: 80vh;
+                min-height: 85vh;
             }
             .hero-text {
                 flex: 1;
-                padding-right: 2rem;
+                padding-right: 3rem;
             }
             .hero h1 {
-                font-size: 3.5rem;
+                font-size: 3.8rem;
             }
             .hero-image {
                 flex: 1;
@@ -365,93 +435,107 @@
 <body>
 
     <nav>
-        <div class="logo">Atelier <span>Treueherz</span></div>
+        <div class="logo"><i class="fas fa-paw"></i> Atelier <span>Treueherz</span></div>
         <div class="nav-links">
-            <a href="#how-it-works">So funktioniert's</a>
-            <a href="#products">Kollektion</a>
-            <a href="#charity">Unser Herz</a>
+            <a href="#how-it-works">Ablauf</a>
+            <a href="#products">Galerie</a>
+            <a href="#charity">Spenden</a>
         </div>
     </nav>
 
     <header class="hero">
         <div class="hero-text">
-            <h1>Weil Liebe ein Denkmal verdient.</h1>
-            <p>Veredeln Sie Ihr liebstes Foto zu einem Kunstwerk für die Ewigkeit. Handgefertigt in Deutschland, mit Herz für den Tierschutz.</p>
-            <a href="#products" class="btn btn-primary">Jetzt Portrait gestalten</a>
+            <span class="handwritten" style="font-size: 1.8rem; display:block; margin-bottom:10px;">Für Ihre Fellnase</span>
+            <h1>Mehr als nur ein Hund.<br>Er ist <span style="color: var(--accent-color);">Familie.</span></h1>
+            <p>Halten Sie die einzigartige Seele Ihres Lieblings für immer fest. Ein handgefertigtes Portrait, so besonders wie die Liebe zu Ihrem Hund.</p>
+            
+            <div style="display:flex; align-items:center; gap: 15px; justify-content: center; @media(min-width:768px){justify-content:flex-start}">
+                <a href="#products" class="btn btn-primary">Jetzt Freude bestellen</a>
+            </div>
+            <p style="font-size: 0.85rem; margin-top: 10px; opacity: 0.8;"><i class="fas fa-check-circle" style="color: var(--highlight-color);"></i> Kostenlose Vorschau vor dem Druck</p>
         </div>
         <div class="hero-image">
-            <img src="Hundeportrait.jpg" alt="Hundeportrait im Wohnzimmer">
+            <img src="Hundeportrait.jpg" alt="Glücklicher Hund auf Leinwand">
         </div>
     </header>
 
     <section class="trust-bar">
-        <div class="trust-item"><i class="fas fa-map-marker-alt"></i> Made in Germany</div>
-        <div class="trust-item"><i class="fas fa-paw"></i> Spende pro Bestellung</div>
-        <div class="trust-item"><i class="fas fa-paint-brush"></i> Galerie-Qualität</div>
-        <div class="trust-item"><i class="fas fa-shipping-fast"></i> Schneller Versand</div>
+        <div class="trust-item"><i class="fas fa-heart"></i> Mit Liebe gemacht</div>
+        <div class="trust-item"><i class="fas fa-gift"></i> Das perfekte Geschenk</div>
+        <div class="trust-item"><i class="fas fa-dog"></i> Futterspende inklusive</div>
+        <div class="trust-item"><i class="fas fa-shipping-fast"></i> Sicherer Versand</div>
     </section>
 
     <section id="products" class="products">
-        <h2 class="section-title">Unsere Kollektion</h2>
-        <p class="section-subtitle">Wählen Sie den Stil, der den Charakter Ihres Lieblings am besten unterstreicht.</p>
+        <span class="handwritten" style="font-size: 1.5rem;">Unsere Lieblinge</span>
+        <h2 class="section-title">Wählen Sie Ihren Stil</h2>
+        <p class="section-subtitle">Ob als kleiner König oder ganz pur – wir zaubern aus Ihrem Handyfoto ein Kunstwerk, das das Herz berührt.</p>
 
         <div class="product-grid">
             <div class="product-card">
                 <div class="product-image">
-                    <img src="TheRoyalStil.jpg" alt="The Royal Stil">
+                    <div class="badge">Der Bestseller</div>
+                    <img src="TheRoyalStil.jpg" alt="Der kleine König">
                 </div>
-                <h3>The Royal</h3>
-                <p>Der zeitlose Klassiker. Ihr Liebling als adliger Herrscher im Renaissance-Stil.</p>
-                <span class="price">ab 89,00 €</span>
-                <button class="btn btn-outline">Auswählen</button>
+                <div class="product-content">
+                    <h3>Der kleine König</h3>
+                    <p>Hat Ihr Liebling zu Hause auch das Sagen? Ein charmantes Portrait im historischen Gewand – bringt jeden Gast zum Lächeln.</p>
+                    <span class="price">ab 89,00 €</span>
+                    <button class="btn btn-outline">Das will ich haben</button>
+                </div>
             </div>
 
             <div class="product-card">
                 <div class="product-image">
-                    <img src="ModernMinimalistStil.jpg" alt="Modern Minimalist Stil">
+                    <img src="ModernMinimalistStil.jpg" alt="Seelenhund Modern">
                 </div>
-                <h3>Modern Minimalist</h3>
-                <p>Elegante Linienführung auf schwerem Künstlerpapier. Perfekt für moderne Interiors.</p>
-                <span class="price">ab 79,00 €</span>
-                <button class="btn btn-outline">Auswählen</button>
+                <div class="product-content">
+                    <h3>Seelenhund Pur</h3>
+                    <p>Ganz schlicht und ergreifend. Moderne Linienführung, die den sanften Blick Ihres Hundes in den Mittelpunkt stellt.</p>
+                    <span class="price">ab 79,00 €</span>
+                    <button class="btn btn-outline">Das will ich haben</button>
+                </div>
             </div>
 
             <div class="product-card">
                 <div class="product-image">
-                    <img src="VogueEditorialStil.jpg" alt="Vogue Editorial Stil">
+                    <img src="VogueEditorialStil.jpg" alt="Herzenshund Portrait">
                 </div>
-                <h3>Vogue Editorial</h3>
-                <p>High-Fashion Ästhetik. Perfekt ausgeleuchtet und retuschiert wie ein Topmodel.</p>
-                <span class="price">ab 99,00 €</span>
-                <button class="btn btn-outline">Auswählen</button>
+                <div class="product-content">
+                    <h3>Herzenshund</h3>
+                    <p>Strahlt wie ein Star. Wir setzen Ihren Hund ins perfekte Licht. Ideal für alle, die das Besondere lieben.</p>
+                    <span class="price">ab 99,00 €</span>
+                    <button class="btn btn-outline">Das will ich haben</button>
+                </div>
             </div>
         </div>
     </section>
 
     <section id="charity" class="charity">
         <div class="charity-img">
-            <img src="TierheimSpende.jpg" alt="Tierheim Spende">
+            <img src="TierheimSpende.jpg" alt="Hunde im Tierheim freuen sich">
         </div>
         <div class="charity-content">
-            <h2>Schönes für die Wände. Gutes für die Seele.</h2>
-            <p>Wir beim <strong>Atelier Treueherz</strong> glauben, dass jedes Tier ein liebevolles Zuhause verdient. Deshalb ist Ihr Kauf mehr als nur Dekoration.</p>
-            <p>Von jedem verkauften Portrait spenden wir automatisch eine Mahlzeit an ein deutsches Tierheim. Helfen Sie uns, Näpfe zu füllen.</p>
-            <a href="#products" class="btn btn-primary">Jetzt helfen & bestellen</a>
+            <span class="handwritten" style="font-size: 1.8rem;">Helfen macht glücklich</span>
+            <h2>Ein volles Bäuchlein für jeden Kauf.</h2>
+            <p>Wir wissen, wie sehr Sie Tiere lieben. Wir auch!</p>
+            <p>Deshalb füllen wir mit jedem Portrait, das Sie bestellen, einen Napf in einem deutschen Tierheim. So machen Sie nicht nur sich selbst oder einer Freundin eine Freude, sondern auch einer einsamen Fellnase.</p>
+            <a href="#products" class="btn btn-primary">Jetzt bestellen & Gutes tun</a>
         </div>
     </section>
 
     <footer>
         <div class="logo">Atelier <span>Treueherz</span></div>
-        <p>Manufaktur für Tierportraits • Made in Germany</p>
+        <p>Die Manufaktur für unvergessliche Tiermomente • Aus Deutschland</p>
         
         <div class="footer-links">
             <a href="#">Impressum</a>
             <a href="#">Datenschutz</a>
-            <a href="#">AGB</a>
-            <a href="#">Versand</a>
+            <a href="#">Unsere AGB</a>
+            <a href="#">Versandinfos</a>
         </div>
         
-        <p style="font-size: 0.8rem; opacity: 0.7;">&copy; <span id="year"></span> Atelier Treueherz. Alle Rechte vorbehalten.</p>
+        <p style="font-size: 0.8rem; opacity: 0.7;">&copy; <span id="year"></span> Atelier Treueherz. Mit <i class="fas fa-heart" style="color: var(--accent-color);"></i> gestaltet.</p>
     </footer>
 
     <script>
