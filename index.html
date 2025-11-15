@@ -3,9 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>Atelier Treueherz | Einzigartige Hundeportraits & Geschenke</title>
-    <meta name="description" content="Verwandeln Sie Ihr Hundefoto in ein einzigartiges Kunstwerk. Handgefertigte Portraits, Vorschau inklusive & Futterspende bei jeder Bestellung.">
+    <title>Atelier Treueherz | Einzigartige Erinnerungen für Hundemamas</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,53 +12,79 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
-        /* --- FARBWELT --- */
+        /* --- NEUE FARBWELT: WARM, HERZLICH, WEIBLICH (40-60J) --- */
         :root {
-            --primary-color: #5D5C61;
-            --accent-color: #D68C8C;
-            --highlight-color: #9EBC9F;
-            --bg-color: #FDFBF7;
+            --primary-color: #5D5C61; /* Warmes Dunkelgrau statt hartes Blau */
+            --accent-color: #D68C8C; /* Altrosa / Dusty Rose - sehr beliebt! */
+            --highlight-color: #9EBC9F; /* Salbei-Grün für Natürlichkeit */
+            --bg-color: #FDFBF7; /* Weiches Creme-Weiß */
             --text-color: #4a4a4a;
             --white: #ffffff;
-            --gold: #C5A059;
+            --gold: #C5A059; /* Bleibt als Akzent */
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
         body {
-            font-family: 'Nunito', sans-serif;
+            font-family: 'Nunito', sans-serif; /* Rundere, freundliche Schrift */
             background-color: var(--bg-color);
             color: var(--text-color);
             line-height: 1.6;
         }
 
-        h1, h2, h3 { font-family: 'Playfair Display', serif; color: var(--primary-color); }
-        
+        /* Überschriften Mix */
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary-color);
+        }
+
+        /* Die "Handschrift" für emotionale Keywords */
         .handwritten {
             font-family: 'Dancing Script', cursive;
             color: var(--accent-color);
             font-weight: 700;
         }
 
-        img { max-width: 100%; height: auto; display: block; }
-        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
 
-        /* --- BUTTONS --- */
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: 0.3s;
+        }
+
+        /* --- BUTTONS: Weicher und runder --- */
         .btn {
             display: inline-block;
             padding: 14px 35px;
             font-size: 1.1rem;
             font-weight: 700;
-            text-transform: none;
+            text-transform: none; /* Nicht mehr alles Großbuchstaben */
             border: none;
-            border-radius: 50px;
+            border-radius: 50px; /* Pillen-Form ist freundlicher */
             cursor: pointer;
             box-shadow: 0 4px 15px rgba(214, 140, 140, 0.3);
             transition: all 0.3s ease;
         }
 
-        .btn-primary { background-color: var(--accent-color); color: var(--white); }
-        .btn-primary:hover { background-color: #c07070; transform: translateY(-3px); box-shadow: 0 6px 20px rgba(214, 140, 140, 0.5); }
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background-color: #c07070;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(214, 140, 140, 0.5);
+        }
 
         .btn-outline {
             border: 2px solid var(--accent-color);
@@ -70,7 +94,11 @@
             padding: 10px 25px;
             font-size: 0.95rem;
         }
-        .btn-outline:hover { background-color: var(--accent-color); color: var(--white); }
+
+        .btn-outline:hover {
+            background-color: var(--accent-color);
+            color: var(--white);
+        }
 
         /* --- NAVIGATION --- */
         nav {
@@ -83,7 +111,6 @@
             position: sticky;
             top: 0;
             z-index: 1000;
-            flex-wrap: wrap; /* Für Mobile wichtig */
         }
 
         .logo {
@@ -92,13 +119,31 @@
             font-weight: 700;
             color: var(--primary-color);
         }
-        .logo i, .logo span { color: var(--accent-color); }
 
-        .nav-links { display: flex; gap: 2rem; }
-        .nav-links a { font-size: 1rem; font-weight: 600; }
-        .nav-links a:hover { color: var(--accent-color); }
+        .logo i {
+            color: var(--accent-color);
+            margin-right: 5px;
+        }
 
-        /* --- HERO --- */
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* --- HERO SECTION --- */
         .hero {
             display: flex;
             flex-direction: column-reverse;
@@ -107,17 +152,51 @@
             gap: 3rem;
             background: linear-gradient(to bottom, #fff, #FDFBF7);
         }
-        .hero-text { text-align: center; }
-        .hero h1 { font-size: 2.8rem; margin-bottom: 1.2rem; line-height: 1.2; }
-        .hero-image { width: 100%; max-width: 550px; position: relative; }
-        .hero-image::before {
-            content: ''; position: absolute; width: 90%; height: 90%;
-            background-color: rgba(214, 140, 140, 0.15); border-radius: 50%;
-            z-index: -1; top: -20px; right: -20px;
-        }
-        .hero-image img { border-radius: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.1); }
 
-        /* --- TRUST BAR --- */
+        .hero-text {
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1.2rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #666;
+        }
+
+        /* Bildanpassung Hero */
+        .hero-image {
+            width: 100%;
+            max-width: 550px;
+            position: relative;
+        }
+        
+        /* Dekoratives Element hinter dem Bild (ein Kreis) */
+        .hero-image::before {
+            content: '';
+            position: absolute;
+            width: 90%;
+            height: 90%;
+            background-color: rgba(214, 140, 140, 0.15); /* Zartes Rosa */
+            border-radius: 50%;
+            z-index: -1;
+            top: -20px;
+            right: -20px;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: auto; 
+            border-radius: 20px; /* Weiche Ecken */
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+
+        /* --- TRUST BAR (Jetzt mit Herzchen) --- */
         .trust-bar {
             background-color: var(--white);
             padding: 2rem 5%;
@@ -125,108 +204,231 @@
             justify-content: center;
             flex-wrap: wrap;
             gap: 2rem;
-            border-top: 1px dashed #e0d0d0;
+            border-top: 1px dashed #e0d0d0; /* Gestrichelte Linie wirkt handgemacht */
             border-bottom: 1px dashed #e0d0d0;
         }
-        .trust-item { display: flex; align-items: center; gap: 10px; font-weight: 700; color: var(--primary-color); }
-        .trust-item i { color: var(--highlight-color); font-size: 1.3rem; }
 
-        /* --- HOW IT WORKS (NEU) --- */
-        .how-it-works {
-            padding: 5rem 5%;
-            text-align: center;
-            background-color: #fff;
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--primary-color);
         }
-        .steps-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
-            margin-top: 3rem;
-        }
-        .step-card i {
-            font-size: 2.5rem;
-            color: var(--accent-color);
-            margin-bottom: 1rem;
-            background: #FFF0F0;
-            width: 80px;
-            height: 80px;
-            line-height: 80px;
-            border-radius: 50%;
+
+        .trust-item i {
+            color: var(--highlight-color); /* Salbei Grün */
+            font-size: 1.3rem;
         }
 
         /* --- PRODUCTS --- */
-        .products { padding: 5rem 5%; text-align: center; }
-        .section-title { font-size: 2.2rem; margin-bottom: 0.5rem; }
-        .section-subtitle { color: #777; margin-bottom: 3rem; font-size: 1.1rem; max-width: 700px; margin: 0 auto 3rem auto; }
-        
-        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem; }
-        
-        .product-card {
-            background: var(--white); border-radius: 15px; overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.04); transition: 0.3s;
-            display: flex; flex-direction: column; height: 100%; border: 1px solid #f0f0f0;
-        }
-        .product-card:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(214, 140, 140, 0.15); border-color: var(--accent-color); }
-
-        .product-image { height: 320px; width: 100%; background-color: #f4f4f4; margin-bottom: 1rem; position: relative; }
-        .product-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s ease; }
-        .product-card:hover .product-image img { transform: scale(1.08); }
-        
-        .product-content { padding: 1.5rem; display: flex; flex-direction: column; flex-grow: 1; }
-        .price { display: block; color: var(--primary-color); font-weight: 800; font-size: 1.3rem; margin-bottom: 1rem; }
-
-        .badge {
-            position: absolute; top: 15px; right: 15px;
-            background-color: var(--white); color: var(--accent-color);
-            padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 800;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1); z-index: 2;
-        }
-
-        /* --- ORDER SECTION (NEU für JotForm) --- */
-        .order-section {
-            padding: 4rem 5%;
-            background-color: #FAF9F6;
+        .products {
+            padding: 5rem 5%;
             text-align: center;
-            scroll-margin-top: 100px; /* Damit die Navbar beim Scrollen nichts verdeckt */
         }
-        .form-container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: white;
-            padding: 20px;
+
+        .section-title {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-subtitle {
+            color: #777;
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .product-card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.04);
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            border: 1px solid #f0f0f0;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(214, 140, 140, 0.15);
+            border-color: var(--accent-color);
+        }
+
+        /* Bildanpassung Produkte */
+        .product-image {
+            height: 320px;
+            width: 100%;
+            background-color: #f4f4f4;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            transition: transform 0.8s ease;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.08);
+        }
+        
+        .product-content {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .product-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .product-card p {
+            flex-grow: 1;
+            margin-bottom: 1rem;
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .price {
+            display: block;
+            color: var(--primary-color);
+            font-weight: 800;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Badge für Bestseller */
+        .badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: var(--white);
+            color: var(--accent-color);
+            padding: 5px 12px;
             border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            font-size: 0.8rem;
+            font-weight: 800;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            z-index: 2;
         }
 
         /* --- CHARITY --- */
         .charity {
-            background-color: #EFEBE9; padding: 5rem 5%;
-            display: flex; flex-wrap: wrap; align-items: center; gap: 4rem;
-            border-radius: 0 0 50px 50px; margin-top: 3rem;
+            background-color: #EFEBE9; /* Warmes Taupe */
+            padding: 5rem 5%;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 4rem;
+            border-radius: 0 0 50px 50px; /* Verspielter Abschluss */
         }
-        .charity-content, .charity-img { flex: 1; min-width: 300px; }
-        .charity-img { height: 400px; position: relative; }
-        .charity-img img { width: 100%; height: 100%; object-fit: cover; border-radius: 20px; border: 5px solid var(--white); }
+
+        .charity-content, .charity-img {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        /* Bildanpassung Charity */
+        .charity-img {
+            height: 400px;
+            position: relative;
+        }
+
+        .charity-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 5px solid var(--white); /* Weißer Fotorahmen-Look */
+        }
+
+        .charity-content h2 {
+            margin-bottom: 1.5rem;
+        }
+
+        .charity-content p {
+            margin-bottom: 1.2rem;
+            font-size: 1.05rem;
+        }
 
         /* --- FOOTER --- */
-        footer { background-color: var(--primary-color); color: var(--white); padding: 4rem 5% 2rem; text-align: center; }
-        footer .logo { margin-bottom: 1rem; display: inline-block; text-shadow: -1px -1px 0 var(--gold), 1px -1px 0 var(--gold), -1px 1px 0 var(--gold), 1px 1px 0 var(--gold); }
-        footer .logo span { color: var(--gold); text-shadow: none; font-family: 'Dancing Script', cursive; font-size: 2.2rem; }
-        .footer-links { margin: 2rem 0; }
-        .footer-links a { color: #d0d0d0; margin: 0 15px; }
-        .footer-links a:hover { color: var(--accent-color); }
+        footer {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 4rem 5% 2rem;
+            text-align: center;
+        }
+
+        footer .logo {
+            font-size: 2rem;
+            color: var(--primary-color); 
+            /* Die Goldene Umrandung (behalten wir, wirkt edel) */
+            text-shadow: 
+                -1px -1px 0 var(--gold),  
+                 1px -1px 0 var(--gold),
+                -1px  1px 0 var(--gold),
+                 1px  1px 0 var(--gold);
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+        
+        footer .logo span {
+            color: var(--gold);
+            text-shadow: none;
+            font-family: 'Dancing Script', cursive; /* Auch hier Handschrift */
+            font-size: 2.2rem;
+        }
+
+        .footer-links {
+            margin: 2rem 0;
+        }
+        
+        .footer-links a {
+            color: #d0d0d0;
+            margin: 0 15px;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
 
         /* --- RESPONSIVE --- */
-        @media (max-width: 768px) {
-            nav { flex-direction: column; gap: 1rem; }
-            .nav-links { gap: 1rem; font-size: 0.9rem; }
-            .hero h1 { font-size: 2.2rem; }
-        }
         @media (min-width: 768px) {
-            .hero { flex-direction: row; text-align: left; min-height: 85vh; }
-            .hero-text { flex: 1; padding-right: 3rem; }
-            .hero h1 { font-size: 3.8rem; }
-            .hero-image { flex: 1; }
+            .hero {
+                flex-direction: row;
+                text-align: left;
+                min-height: 85vh;
+            }
+            .hero-text {
+                flex: 1;
+                padding-right: 3rem;
+            }
+            .hero h1 {
+                font-size: 3.8rem;
+            }
+            .hero-image {
+                flex: 1;
+            }
         }
     </style>
 </head>
@@ -235,9 +437,9 @@
     <nav>
         <div class="logo"><i class="fas fa-paw"></i> Atelier <span>Treueherz</span></div>
         <div class="nav-links">
-            <a href="#how-it-works">So geht's</a>
+            <a href="#how-it-works">Ablauf</a>
             <a href="#products">Galerie</a>
-            <a href="#order" style="color: var(--accent-color);">Jetzt bestellen</a>
+            <a href="#charity">Spenden</a>
         </div>
     </nav>
 
@@ -248,7 +450,7 @@
             <p>Halten Sie die einzigartige Seele Ihres Lieblings für immer fest. Ein handgefertigtes Portrait, so besonders wie die Liebe zu Ihrem Hund.</p>
             
             <div style="display:flex; align-items:center; gap: 15px; justify-content: center; @media(min-width:768px){justify-content:flex-start}">
-                <a href="#order" class="btn btn-primary">Jetzt Freude bestellen</a>
+                <a href="#products" class="btn btn-primary">Jetzt Freude bestellen</a>
             </div>
             <p style="font-size: 0.85rem; margin-top: 10px; opacity: 0.8;"><i class="fas fa-check-circle" style="color: var(--highlight-color);"></i> Kostenlose Vorschau vor dem Druck</p>
         </div>
@@ -262,29 +464,6 @@
         <div class="trust-item"><i class="fas fa-gift"></i> Das perfekte Geschenk</div>
         <div class="trust-item"><i class="fas fa-dog"></i> Futterspende inklusive</div>
         <div class="trust-item"><i class="fas fa-shipping-fast"></i> Sicherer Versand</div>
-    </section>
-
-    <section id="how-it-works" class="how-it-works">
-        <span class="handwritten" style="font-size: 1.5rem;">Einfacher geht's nicht</span>
-        <h2 class="section-title">In 3 Schritten zum Glück</h2>
-        
-        <div class="steps-grid">
-            <div class="step-card">
-                <i class="fas fa-camera"></i>
-                <h3>1. Foto hochladen</h3>
-                <p>Machen Sie einfach ein Handyfoto. Wir kümmern uns um den Rest.</p>
-            </div>
-            <div class="step-card">
-                <i class="fas fa-paint-brush"></i>
-                <h3>2. Wir designen</h3>
-                <p>Wir erstellen Ihr Unikat. Sie erhalten eine Vorschau per E-Mail.</p>
-            </div>
-            <div class="step-card">
-                <i class="fas fa-box-open"></i>
-                <h3>3. Freude auspacken</h3>
-                <p>Nach Ihrer Freigabe drucken wir und versenden sicher verpackt.</p>
-            </div>
-        </div>
     </section>
 
     <section id="products" class="products">
@@ -302,45 +481,41 @@
                     <h3>Der kleine König</h3>
                     <p>Hat Ihr Liebling zu Hause auch das Sagen? Ein charmantes Portrait im historischen Gewand – bringt jeden Gast zum Lächeln.</p>
                     <span class="price">ab 89,00 €</span>
-                    <a href="#order" class="btn btn-outline">Hier auswählen</a>
+<a href="https://form.jotform.com/253183756171056" target="_blank" class="btn btn-outline">
+    Das will ich haben
+</a>
                 </div>
             </div>
 
             <div class="product-card">
                 <div class="product-image">
-                    <div class="badge" style="background-color: #EFEBE9; color: #5D5C61;">310g Künstlerpapier</div>
+    <div class="badge" style="background-color: #EFEBE9; color: #5D5C61;">310g Künstlerpapier</div>
                     <img src="ModernMinimalistStil.jpg" alt="Seelenhund Modern">
                 </div>
                 <div class="product-content">
                     <h3>Seelenhund Pur</h3>
                     <p>Ganz schlicht und ergreifend. Moderne Linienführung, die den sanften Blick Ihres Hundes in den Mittelpunkt stellt.</p>
                     <span class="price">ab 79,00 €</span>
-                    <a href="#order" class="btn btn-outline">Hier auswählen</a>
+<a href="https://form.jotform.com/253183756171056" target="_blank" class="btn btn-outline">
+    Das will ich haben
+</a>
                 </div>
             </div>
 
             <div class="product-card">
                 <div class="product-image">
-                    <div class="badge" style="background-color: #F5E6D3; color: #8B7355;">Der Cover-Look</div>
+                            <div class="badge" style="background-color: #F5E6D3; color: #8B7355;">Der Cover-Look</div>
                     <img src="VogueEditorialStil.jpg" alt="Herzenshund Portrait">
                 </div>
                 <div class="product-content">
                     <h3>Herzenshund</h3>
                     <p>Strahlt wie ein Star. Wir setzen Ihren Hund ins perfekte Licht. Ideal für alle, die das Besondere lieben.</p>
                     <span class="price">ab 99,00 €</span>
-                    <a href="#order" class="btn btn-outline">Hier auswählen</a>
+<a href="https://form.jotform.com/253183756171056" target="_blank" class="btn btn-outline">
+    Das will ich haben
+</a>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <section id="order" class="order-section">
-        <span class="handwritten" style="font-size: 2rem;">Legen wir los!</span>
-        <h2 class="section-title">Ihr Unikat gestalten</h2>
-        <p style="margin-bottom: 2rem;">Einfach ausfüllen & Foto hochladen. Die Bezahlung erfolgt sicher via PayPal oder Karte.</p>
-        
-        <div class="form-container">
-            <script type="text/javascript" src="https://form.jotform.com/jsform/253183756171056"></script>
         </div>
     </section>
 
@@ -352,8 +527,8 @@
             <span class="handwritten" style="font-size: 1.8rem;">Helfen macht glücklich</span>
             <h2>Ein volles Bäuchlein für jeden Kauf.</h2>
             <p>Wir wissen, wie sehr Sie Tiere lieben. Wir auch!</p>
-            <p>Deshalb füllen wir mit jedem Portrait, das Sie bestellen, einen Napf in einem deutschen Tierheim.</p>
-            <a href="#order" class="btn btn-primary">Jetzt bestellen & Gutes tun</a>
+            <p>Deshalb füllen wir mit jedem Portrait, das Sie bestellen, einen Napf in einem deutschen Tierheim. So machen Sie nicht nur sich selbst oder einer Freundin eine Freude, sondern auch einer einsamen Fellnase.</p>
+            <a href="#products" class="btn btn-primary">Jetzt bestellen & Gutes tun</a>
         </div>
     </section>
 
@@ -364,7 +539,8 @@
         <div class="footer-links">
             <a href="#">Impressum</a>
             <a href="#">Datenschutz</a>
-            <a href="#">AGB</a>
+            <a href="#">Unsere AGB</a>
+            <a href="#">Versandinfos</a>
         </div>
         
         <p style="font-size: 0.8rem; opacity: 0.7;">&copy; <span id="year"></span> Atelier Treueherz. Mit <i class="fas fa-heart" style="color: var(--accent-color);"></i> gestaltet.</p>
@@ -372,17 +548,12 @@
 
     <script>
         document.getElementById('year').textContent = new Date().getFullYear();
-        
-        // Smooth Scroll Logik für alle Links, die mit # beginnen
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if(target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                }
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
             });
         });
     </script>
