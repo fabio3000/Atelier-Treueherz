@@ -3,557 +3,305 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atelier Treueherz | Einzigartige Erinnerungen für Hundemamas</title>
+    <title>Atelier Treueherz | The Invisible Bond</title>
+    <meta name="description" content="Verewige das Bellen deines Hundes als Soundwave-Kunst oder entdecke eure astrologische Seelenverbindung.">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Playfair+Display:wght@600;700&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Cinzel:wght@400;600&family=Nunito:wght@300;400;700&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
-        /* --- NEUE FARBWELT: WARM, HERZLICH, WEIBLICH (40-60J) --- */
+        /* --- NEUE FARBWELT: MYSTISCH & MODERN --- */
         :root {
-            --primary-color: #5D5C61; /* Warmes Dunkelgrau statt hartes Blau */
-            --accent-color: #D68C8C; /* Altrosa / Dusty Rose - sehr beliebt! */
-            --highlight-color: #9EBC9F; /* Salbei-Grün für Natürlichkeit */
-            --bg-color: #FDFBF7; /* Weiches Creme-Weiß */
-            --text-color: #4a4a4a;
-            --white: #ffffff;
-            --gold: #C5A059; /* Bleibt als Akzent */
+            --bg-color: #FAFAFA;
+            --text-main: #2D3436;
+            --primary-dark: #2C3E50; /* Tiefes Mitternachtsblau */
+            --accent-gold: #C5A059; /* Für Sterne/Astro */
+            --accent-rose: #D68C8C; /* Für Herz/Emotion */
+            --sound-wave: #6C5CE7; /* Modernes Lila-Blau für Sound */
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Nunito', sans-serif; /* Rundere, freundliche Schrift */
+            font-family: 'Nunito', sans-serif;
             background-color: var(--bg-color);
-            color: var(--text-color);
+            color: var(--text-main);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        /* Überschriften Mix */
+        /* Typografie */
         h1, h2, h3 {
-            font-family: 'Playfair Display', serif;
-            color: var(--primary-color);
+            font-family: 'Cinzel', serif; /* Edel & etwas mystisch */
+            color: var(--primary-dark);
+            letter-spacing: 1px;
         }
-
-        /* Die "Handschrift" für emotionale Keywords */
+        
         .handwritten {
             font-family: 'Dancing Script', cursive;
-            color: var(--accent-color);
+            color: var(--accent-rose);
             font-weight: 700;
         }
 
-        img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-            transition: 0.3s;
-        }
-
-        /* --- BUTTONS: Weicher und runder --- */
-        .btn {
-            display: inline-block;
-            padding: 14px 35px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            text-transform: none; /* Nicht mehr alles Großbuchstaben */
-            border: none;
-            border-radius: 50px; /* Pillen-Form ist freundlicher */
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(214, 140, 140, 0.3);
-            transition: all 0.3s ease;
-        }
-
-        .btn-primary {
-            background-color: var(--accent-color);
-            color: var(--white);
-        }
-
-        .btn-primary:hover {
-            background-color: #c07070;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(214, 140, 140, 0.5);
-        }
-
-        .btn-outline {
-            border: 2px solid var(--accent-color);
-            color: var(--accent-color);
-            background: transparent;
-            border-radius: 50px;
-            padding: 10px 25px;
-            font-size: 0.95rem;
-        }
-
-        .btn-outline:hover {
-            background-color: var(--accent-color);
-            color: var(--white);
-        }
+        img { max-width: 100%; display: block; border-radius: 10px; }
+        a { text-decoration: none; transition: 0.3s; }
 
         /* --- NAVIGATION --- */
         nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 5%;
-            background-color: var(--white);
-            box-shadow: 0 2px 15px rgba(0,0,0,0.03);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1.5rem 5%; background: white; position: sticky; top: 0; z-index: 1000;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.03);
         }
-
-        .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: var(--primary-color);
-        }
-
-        .logo i {
-            color: var(--accent-color);
-            margin-right: 5px;
-        }
-
-        .logo span {
-            color: var(--accent-color);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            font-size: 1rem;
-            font-weight: 600;
-        }
-
-        .nav-links a:hover {
-            color: var(--accent-color);
-        }
+        .logo { font-family: 'Cinzel', serif; font-size: 1.5rem; font-weight: 600; color: var(--primary-dark); }
+        .logo span { color: var(--accent-gold); }
 
         /* --- HERO SECTION --- */
         .hero {
-            display: flex;
-            flex-direction: column-reverse;
-            padding: 4rem 5%;
-            align-items: center;
-            gap: 3rem;
-            background: linear-gradient(to bottom, #fff, #FDFBF7);
-        }
-
-        .hero-text {
+            min-height: 90vh;
+            display: flex; align-items: center; justify-content: center;
             text-align: center;
-        }
-
-        .hero h1 {
-            font-size: 2.8rem;
-            margin-bottom: 1.2rem;
-            line-height: 1.2;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            color: #666;
-        }
-
-        /* Bildanpassung Hero */
-        .hero-image {
-            width: 100%;
-            max-width: 550px;
-            position: relative;
-        }
-        
-        /* Dekoratives Element hinter dem Bild (ein Kreis) */
-        .hero-image::before {
-            content: '';
-            position: absolute;
-            width: 90%;
-            height: 90%;
-            background-color: rgba(214, 140, 140, 0.15); /* Zartes Rosa */
-            border-radius: 50%;
-            z-index: -1;
-            top: -20px;
-            right: -20px;
-        }
-
-        .hero-image img {
-            width: 100%;
-            height: auto; 
-            border-radius: 20px; /* Weiche Ecken */
-            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
-        }
-
-        /* --- TRUST BAR (Jetzt mit Herzchen) --- */
-        .trust-bar {
-            background-color: var(--white);
+            background: radial-gradient(circle at center, #fff, #f3f0ff);
             padding: 2rem 5%;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 2rem;
-            border-top: 1px dashed #e0d0d0; /* Gestrichelte Linie wirkt handgemacht */
-            border-bottom: 1px dashed #e0d0d0;
-        }
-
-        .trust-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--primary-color);
-        }
-
-        .trust-item i {
-            color: var(--highlight-color); /* Salbei Grün */
-            font-size: 1.3rem;
-        }
-
-        /* --- PRODUCTS --- */
-        .products {
-            padding: 5rem 5%;
-            text-align: center;
-        }
-
-        .section-title {
-            font-size: 2.2rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .section-subtitle {
-            color: #777;
-            margin-bottom: 3rem;
-            font-size: 1.1rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2.5rem;
-        }
-
-        .product-card {
-            background: var(--white);
-            border-radius: 15px;
+            position: relative;
             overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.04);
-            transition: 0.3s;
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-            border: 1px solid #f0f0f0;
-        }
-
-        .product-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 30px rgba(214, 140, 140, 0.15);
-            border-color: var(--accent-color);
-        }
-
-        /* Bildanpassung Produkte */
-        .product-image {
-            height: 320px;
-            width: 100%;
-            background-color: #f4f4f4;
-            margin-bottom: 1rem;
-            position: relative;
         }
         
-        .product-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
-            transition: transform 0.8s ease;
+        /* Hintergrund-Deko (Abstrakte Wellen) */
+        .hero::before {
+            content: ''; position: absolute; width: 200%; height: 200%;
+            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNDQwIDMyMCI+PHBhdGggZmlsbD0iI2U5ZTRmNyIgZmlsbC1vcGFjaXR5PSIwLjUiIGQ9Ik0wLDk2TDQ4LDEyMi43Qzk2LDE0OSwxOTIsMjAzLDI4OCwyMDhDMzg0LDIxMyw0ODAsMTcwLDU3NiwxNDkuM0M2NzIsMTI4LDc2OCwxMjgsODY0LDE0OUM5NjAsMTcwLDEwNTYsMjEzLDExNTIsMjEzQzEyNDgsMjEzLDEzNDQsMTcwLDEzOTIsMTQ5LjNMMTQ0MCwxMjhMMTQ0MCwzMjBMMTM5MiwzMjBDMTM0NCwzMjAsMTI0OCwzMjAsMTE1MiwzMjBDMTA1NiwzMjAsOTYwLDMyMCw4NjQsMzIwQzc2OCwzMjAsNjcyLDMyMCw1NzYsMzIwQzQ4MCwzMjAsMzg0LDMyMCwyODgsMzIwQzE5MiwzMjAsOTYsMzIwLDQ4LDMyMEwwLDMyMFoiPjwvcGF0aD48L3N2Zz4=');
+            background-repeat: no-repeat;
+            background-position: bottom;
+            bottom: -50%; opacity: 0.5; z-index: 0;
+            animation: waveMove 20s linear infinite;
         }
 
-        .product-card:hover .product-image img {
-            transform: scale(1.08);
-        }
-        
-        .product-content {
-            padding: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
+        @keyframes waveMove { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-        .product-card h3 {
-            font-size: 1.4rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .product-card p {
-            flex-grow: 1;
-            margin-bottom: 1rem;
-            color: #666;
-            font-size: 0.95rem;
-        }
+        .hero-content { position: relative; z-index: 2; max-width: 800px; }
+        .hero h1 { font-size: 3rem; margin-bottom: 1rem; line-height: 1.2; }
+        .hero p { font-size: 1.2rem; color: #666; margin-bottom: 2.5rem; }
 
-        .price {
-            display: block;
-            color: var(--primary-color);
-            font-weight: 800;
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-        }
+        .btn-group { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
 
-        /* Badge für Bestseller */
-        .badge {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background-color: var(--white);
-            color: var(--accent-color);
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 800;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            z-index: 2;
+        .btn {
+            padding: 15px 40px; border-radius: 50px; font-weight: 700; cursor: pointer; border: none;
+            font-size: 1rem; transition: transform 0.2s;
         }
+        .btn-sound { background: var(--primary-dark); color: white; box-shadow: 0 10px 20px rgba(44, 62, 80, 0.3); }
+        .btn-astro { background: var(--accent-gold); color: white; box-shadow: 0 10px 20px rgba(197, 160, 89, 0.3); }
+        .btn:hover { transform: scale(1.05); }
 
-        /* --- CHARITY --- */
-        .charity {
-            background-color: #EFEBE9; /* Warmes Taupe */
+        /* --- PRODUCT 1: SOUNDWAVE --- */
+        .section-sound {
             padding: 5rem 5%;
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 4rem;
-            border-radius: 0 0 50px 50px; /* Verspielter Abschluss */
+            display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
         }
+        
+        /* Sound Animation Bar */
+        .sound-bars { display: flex; align-items: center; gap: 5px; height: 50px; margin-bottom: 20px; }
+        .bar { width: 6px; background: var(--sound-wave); border-radius: 10px; animation: sound 1s infinite ease-in-out; }
+        .bar:nth-child(1) { height: 20px; animation-delay: 0.1s; }
+        .bar:nth-child(2) { height: 40px; animation-delay: 0.3s; }
+        .bar:nth-child(3) { height: 50px; animation-delay: 0.5s; }
+        .bar:nth-child(4) { height: 30px; animation-delay: 0.2s; }
+        .bar:nth-child(5) { height: 20px; animation-delay: 0.4s; }
+        @keyframes sound { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(1.5); } }
 
-        .charity-content, .charity-img {
-            flex: 1;
-            min-width: 300px;
-        }
-
-        /* Bildanpassung Charity */
-        .charity-img {
-            height: 400px;
+        .product-img-container {
             position: relative;
         }
-
-        .charity-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            border: 5px solid var(--white); /* Weißer Fotorahmen-Look */
+        .product-img-container img {
+            box-shadow: 20px 20px 0px var(--bg-color), 20px 20px 0px 2px var(--primary-dark);
         }
 
-        .charity-content h2 {
-            margin-bottom: 1.5rem;
-        }
-
-        .charity-content p {
-            margin-bottom: 1.2rem;
-            font-size: 1.05rem;
-        }
-
-        /* --- FOOTER --- */
-        footer {
-            background-color: var(--primary-color);
-            color: var(--white);
-            padding: 4rem 5% 2rem;
+        /* --- PRODUCT 2: ASTRO / SOUL TEST --- */
+        .section-astro {
+            background: linear-gradient(135deg, #2C3E50, #1a252f);
+            color: white;
+            padding: 5rem 5%;
             text-align: center;
+            position: relative;
         }
-
-        footer .logo {
-            font-size: 2rem;
-            color: var(--primary-color); 
-            /* Die Goldene Umrandung (behalten wir, wirkt edel) */
-            text-shadow: 
-                -1px -1px 0 var(--gold),  
-                 1px -1px 0 var(--gold),
-                -1px  1px 0 var(--gold),
-                 1px  1px 0 var(--gold);
-            margin-bottom: 1rem;
-            display: inline-block;
+        .section-astro h2, .section-astro h3 { color: var(--accent-gold); }
+        
+        /* Der virale Test */
+        .soul-test-box {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 2rem;
+            border-radius: 20px;
+            max-width: 500px;
+            margin: 3rem auto;
         }
         
-        footer .logo span {
-            color: var(--gold);
-            text-shadow: none;
-            font-family: 'Dancing Script', cursive; /* Auch hier Handschrift */
-            font-size: 2.2rem;
-        }
-
-        .footer-links {
-            margin: 2rem 0;
-        }
+        .input-group { display: flex; gap: 10px; margin-top: 1rem; justify-content: center; }
+        input { padding: 12px; border-radius: 8px; border: none; width: 150px; }
         
-        .footer-links a {
-            color: #d0d0d0;
-            margin: 0 15px;
-            font-size: 0.95rem;
-            transition: color 0.3s;
+        .result-display {
+            display: none; /* Versteckt bis zur Berechnung */
+            margin-top: 20px;
+            animation: fadeIn 1s;
         }
-        
-        .footer-links a:hover {
-            color: var(--accent-color);
-        }
+        .percentage { font-size: 3rem; font-weight: 800; color: var(--accent-gold); display: block;}
 
-        /* --- RESPONSIVE --- */
-        @media (min-width: 768px) {
-            .hero {
-                flex-direction: row;
-                text-align: left;
-                min-height: 85vh;
-            }
-            .hero-text {
-                flex: 1;
-                padding-right: 3rem;
-            }
-            .hero h1 {
-                font-size: 3.8rem;
-            }
-            .hero-image {
-                flex: 1;
-            }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* --- ORDER FORM SECTION --- */
+        .order-section { padding: 5rem 5%; background: #fff; text-align: center; }
+        .jotform-wrapper { max-width: 800px; margin: 0 auto; box-shadow: 0 10px 40px rgba(0,0,0,0.1); border-radius: 20px; overflow: hidden; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .section-sound { grid-template-columns: 1fr; }
+            .btn-group { flex-direction: column; align-items: center; }
         }
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="logo"><i class="fas fa-paw"></i> Atelier <span>Treueherz</span></div>
-        <div class="nav-links">
-            <a href="#how-it-works">Ablauf</a>
-            <a href="#products">Galerie</a>
-            <a href="#charity">Spenden</a>
+        <div class="logo"><i class="fas fa-infinity" style="color: var(--sound-wave);"></i> Atelier <span>Treueherz</span></div>
+        <div style="font-size: 0.9rem; font-weight: 700;">
+            <a href="#sound" style="margin-right: 15px;">Soundwave</a>
+            <a href="#astro">Seelen-Check</a>
         </div>
     </nav>
 
     <header class="hero">
-        <div class="hero-text">
-            <span class="handwritten" style="font-size: 1.8rem; display:block; margin-bottom:10px;">Für Ihre Fellnase</span>
-            <h1>Mehr als nur ein Hund.<br>Er ist <span style="color: var(--accent-color);">Familie.</span></h1>
-            <p>Halten Sie die einzigartige Seele Ihres Lieblings für immer fest. Ein handgefertigtes Portrait, so besonders wie die Liebe zu Ihrem Hund.</p>
+        <div class="hero-content">
+            <span class="handwritten" style="font-size: 2rem; display:block; margin-bottom: 10px;">Unsichtbare Bande</span>
+            <h1>Manche Dinge kann man nicht sehen.<br>Nur <span style="color: var(--accent-rose);">fühlen.</span></h1>
+            <p>Verewige die Stimme oder den Charakter deines Hundes. Einzigartige Kunst, die unter die Haut geht.</p>
             
-            <div style="display:flex; align-items:center; gap: 15px; justify-content: center; @media(min-width:768px){justify-content:flex-start}">
-                <a href="#products" class="btn btn-primary">Jetzt Freude bestellen</a>
+            <div class="btn-group">
+                <a href="#sound" class="btn btn-sound"><i class="fas fa-wave-square"></i> Soundwave erstellen</a>
+                <a href="#astro" class="btn btn-astro"><i class="fas fa-star"></i> Seelen-Test machen</a>
             </div>
-            <p style="font-size: 0.85rem; margin-top: 10px; opacity: 0.8;"><i class="fas fa-check-circle" style="color: var(--highlight-color);"></i> Kostenlose Vorschau vor dem Druck</p>
-        </div>
-        <div class="hero-image">
-            <img src="Hundeportrait.jpg" alt="Glücklicher Hund auf Leinwand">
         </div>
     </header>
 
-    <section class="trust-bar">
-        <div class="trust-item"><i class="fas fa-heart"></i> Mit Liebe gemacht</div>
-        <div class="trust-item"><i class="fas fa-gift"></i> Das perfekte Geschenk</div>
-        <div class="trust-item"><i class="fas fa-dog"></i> Futterspende inklusive</div>
-        <div class="trust-item"><i class="fas fa-shipping-fast"></i> Sicherer Versand</div>
-    </section>
-
-    <section id="products" class="products">
-        <span class="handwritten" style="font-size: 1.5rem;">Unsere Lieblinge</span>
-        <h2 class="section-title">Wählen Sie Ihren Stil</h2>
-        <p class="section-subtitle">Ob als kleiner König oder ganz pur – wir zaubern aus Ihrem Handyfoto ein Kunstwerk, das das Herz berührt.</p>
-
-        <div class="product-grid">
-            <div class="product-card">
-                <div class="product-image">
-                    <div class="badge">Der Bestseller</div>
-                    <img src="TheRoyalStil.jpg" alt="Der kleine König">
-                </div>
-                <div class="product-content">
-                    <h3>Der kleine König</h3>
-                    <p>Hat Ihr Liebling zu Hause auch das Sagen? Ein charmantes Portrait im historischen Gewand – bringt jeden Gast zum Lächeln.</p>
-                    <span class="price">ab 89,00 €</span>
-<a href="https://form.jotform.com/253183756171056" target="_blank" class="btn btn-outline">
-    Das will ich haben
-</a>
-                </div>
+    <section id="sound" class="section-sound">
+        <div class="product-img-container">
+            <img src="SoundwaveArt.jpg" alt="Soundwave Kunst Poster">
+            <div style="margin-top: 20px; text-align: center; font-size: 0.9rem; color: #888;">
+                <i class="fas fa-camera"></i> Scanbar wie ein QR-Code
             </div>
-
-            <div class="product-card">
-                <div class="product-image">
-    <div class="badge" style="background-color: #EFEBE9; color: #5D5C61;">310g Künstlerpapier</div>
-                    <img src="ModernMinimalistStil.jpg" alt="Seelenhund Modern">
-                </div>
-                <div class="product-content">
-                    <h3>Seelenhund Pur</h3>
-                    <p>Ganz schlicht und ergreifend. Moderne Linienführung, die den sanften Blick Ihres Hundes in den Mittelpunkt stellt.</p>
-                    <span class="price">ab 79,00 €</span>
-<a href="https://form.jotform.com/253183756171056" target="_blank" class="btn btn-outline">
-    Das will ich haben
-</a>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <div class="product-image">
-                            <div class="badge" style="background-color: #F5E6D3; color: #8B7355;">Der Cover-Look</div>
-                    <img src="VogueEditorialStil.jpg" alt="Herzenshund Portrait">
-                </div>
-                <div class="product-content">
-                    <h3>Herzenshund</h3>
-                    <p>Strahlt wie ein Star. Wir setzen Ihren Hund ins perfekte Licht. Ideal für alle, die das Besondere lieben.</p>
-                    <span class="price">ab 99,00 €</span>
-<a href="https://form.jotform.com/253183756171056" target="_blank" class="btn btn-outline">
-    Das will ich haben
-</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="charity" class="charity">
-        <div class="charity-img">
-            <img src="TierheimSpende.jpg" alt="Hunde im Tierheim freuen sich">
-        </div>
-        <div class="charity-content">
-            <span class="handwritten" style="font-size: 1.8rem;">Helfen macht glücklich</span>
-            <h2>Ein volles Bäuchlein für jeden Kauf.</h2>
-            <p>Wir wissen, wie sehr Sie Tiere lieben. Wir auch!</p>
-            <p>Deshalb füllen wir mit jedem Portrait, das Sie bestellen, einen Napf in einem deutschen Tierheim. So machen Sie nicht nur sich selbst oder einer Freundin eine Freude, sondern auch einer einsamen Fellnase.</p>
-            <a href="#products" class="btn btn-primary">Jetzt bestellen & Gutes tun</a>
-        </div>
-    </section>
-
-    <footer>
-        <div class="logo">Atelier <span>Treueherz</span></div>
-        <p>Die Manufaktur für unvergessliche Tiermomente • Aus Deutschland</p>
-        
-        <div class="footer-links">
-            <a href="#">Impressum</a>
-            <a href="#">Datenschutz</a>
-            <a href="#">Unsere AGB</a>
-            <a href="#">Versandinfos</a>
         </div>
         
-        <p style="font-size: 0.8rem; opacity: 0.7;">&copy; <span id="year"></span> Atelier Treueherz. Mit <i class="fas fa-heart" style="color: var(--accent-color);"></i> gestaltet.</p>
+        <div class="text-content">
+            <div class="sound-bars">
+                <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+            </div>
+            <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Der Klang der Ewigkeit</h2>
+            <p style="margin-bottom: 1.5rem; font-size: 1.1rem;">
+                Das Bellen, das dich immer begrüßt hat. Das leise Schnarchen auf dem Sofa. Wir verwandeln eine Audio-Aufnahme deiner Fellnase in ein ästhetisches Wellen-Kunstwerk.
+            </p>
+            
+            <ul style="list-style: none; margin-bottom: 2rem; font-weight: 600;">
+                <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: var(--sound-wave);"></i> <b>Als Poster:</b> Mit abspielbarem QR-Code.</li>
+                <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: var(--sound-wave);"></i> <b>Für die Haut:</b> Perfekt als minimalistische Tattoo-Vorlage.</li>
+                <li><i class="fas fa-check" style="color: var(--sound-wave);"></i> <b>Unvergänglich:</b> Eine Erinnerung, die bleibt.</li>
+            </ul>
+
+            <a href="#order" class="btn btn-sound">Jetzt Sound hochladen</a>
+        </div>
+    </section>
+
+    <section id="astro" class="section-astro">
+        <span class="handwritten" style="font-size: 2.5rem; color: var(--accent-gold);">Bist du seine Seelenverwandte?</span>
+        <h2 style="margin-top: 10px;">Das Hunde-Horoskop</h2>
+        <p style="max-width: 600px; margin: 0 auto 2rem auto;">Die Sterne lügen nicht. Finde heraus, wie stark eure Verbindung wirklich ist und erhalte dein persönliches Charakter-Chart.</p>
+
+        <div class="soul-test-box">
+            <h3 style="color: white; font-size: 1.2rem; margin-bottom: 15px;">Mache den kostenlosen Check:</h3>
+            
+            <div id="quiz-interface">
+                <label style="display:block; margin-bottom:5px; font-size:0.9rem;">Dein Geburtstag:</label>
+                <div class="input-group">
+                    <input type="date" id="humanDate">
+                </div>
+                
+                <label style="display:block; margin-top:15px; margin-bottom:5px; font-size:0.9rem;">Geburtstag deiner Fellnase (ungefähr):</label>
+                <div class="input-group">
+                    <input type="date" id="dogDate">
+                </div>
+
+                <button onclick="calculateSoul()" class="btn btn-astro" style="margin-top: 20px; width: 100%;">Jetzt berechnen</button>
+            </div>
+
+            <div id="result-display" class="result-display">
+                <p>Eure Seelen-Verbindung ist:</p>
+                <span class="percentage" id="percentage-text">0%</span>
+                <p id="result-desc" style="font-style: italic; margin-top: 10px; font-size: 0.9rem;"></p>
+                
+                <div style="margin-top: 20px; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 15px;">
+                    <p style="font-size: 0.8rem; margin-bottom: 10px;">Bestelle jetzt eure detaillierte Sternenkarte:</p>
+                    <a href="#order" class="btn btn-astro" style="font-size: 0.9rem;">Zum Zertifikat</a>
+                </div>
+            </div>
+        </div>
+
+        <div style="display: flex; justify-content: center; gap: 20px; margin-top: 3rem; flex-wrap: wrap;">
+            <img src="DogAstrology.jpg" alt="Hunde Horoskop Poster" style="height: 300px; border: 4px solid var(--accent-gold);">
+        </div>
+    </section>
+
+    <section id="order" class="order-section">
+        <h2 style="margin-bottom: 1rem;">Deine Bestellung</h2>
+        <p style="margin-bottom: 2rem; color: #666;">Lade hier deine Sound-Datei hoch oder gib die Geburtsdaten für das Horoskop an.</p>
+        
+        <div class="jotform-wrapper">
+            <script type="text/javascript" src="https://form.jotform.com/jsform/253183756171056"></script>
+        </div>
+    </section>
+
+    <footer style="background: #222; color: #888; padding: 2rem; text-align: center; font-size: 0.8rem;">
+        <p>&copy; 2024 Atelier Treueherz. Gemacht für die Ewigkeit.</p>
     </footer>
 
     <script>
-        document.getElementById('year').textContent = new Date().getFullYear();
+        function calculateSoul() {
+            const human = document.getElementById('humanDate').value;
+            const dog = document.getElementById('dogDate').value;
+
+            if(!human || !dog) {
+                alert("Bitte beide Daten eingeben, damit die Sterne rechnen können! ✨");
+                return;
+            }
+
+            // Simuliere Berechnung (Fake Ladezeit)
+            const btn = document.querySelector('.soul-test-box button');
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Verbinde mit dem Universum...';
+            
+            setTimeout(() => {
+                document.getElementById('quiz-interface').style.display = 'none';
+                const resultBox = document.getElementById('result-display');
+                resultBox.style.display = 'block';
+
+                // Zufallszahl zwischen 88% und 100% (damit sich jeder gut fühlt)
+                const percent = Math.floor(Math.random() * (100 - 88 + 1) + 88);
+                
+                document.getElementById('percentage-text').textContent = percent + "%";
+                
+                let text = "";
+                if(percent > 95) text = "Unglaublich! Ihr wart im früheren Leben eins.";
+                else text = "Eine seltene kosmische Harmonie. Ihr versteht euch ohne Worte.";
+                
+                document.getElementById('result-desc').textContent = text;
+            }, 1500);
+        }
+        
+        // Smooth Scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
             });
         });
     </script>
