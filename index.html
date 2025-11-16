@@ -86,7 +86,7 @@
             padding: 15px 40px; background: var(--accent-color); color: var(--btn-text);
             border: none; border-radius: 50px; font-weight: 700; text-transform: uppercase;
             cursor: pointer; text-decoration: none; display: inline-block; margin-top: 20px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2); transition: 0.3s;
         }
         .cta-btn:disabled { background: #ccc; cursor: not-allowed; }
 
@@ -95,22 +95,26 @@
         .content-section.active { display: block; animation: fadeIn 0.8s; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* --- VISUALS: SOUND WAVE (Line) --- */
+        /* --- VISUALS: SOUND WAVE (ROBUST POLYLINE) --- */
         .visual-sound.single-line-container {
             height: 150px; display: flex; align-items: center; justify-content: center;
             background: #000; border-radius: 10px; overflow: hidden; border: 1px solid #333;
         }
-        .waveform path {
-            animation: bark 1.5s infinite linear;
-            vector-effect: non-scaling-stroke;
+        .waveform polyline {
+            fill: none;
+            stroke: var(--accent-color);
+            stroke-width: 3;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            animation: pulseLine 1s infinite ease-in-out;
         }
-        @keyframes bark {
-            0% { d: path("M0,50 Q25,50 50,50 T100,50 T150,50 T200,50 T250,50 T300,50 T350,50 T400,50 T450,50 T500,50"); }
-            10% { d: path("M0,50 Q25,50 50,50 T100,20 T150,80 T200,10 T250,90 T300,50 T350,50 T400,50 T450,50 T500,50"); } /* Bellen */
-            20% { d: path("M0,50 Q25,50 50,50 T100,50 T150,50 T200,50 T250,50 T300,50 T350,50 T400,50 T450,50 T500,50"); }
-            40% { d: path("M0,50 Q25,50 50,50 T100,50 T150,50 T200,50 T250,30 T300,70 T350,40 T400,60 T450,50 T500,50"); } /* Kleines Bellen */
-            60% { d: path("M0,50 Q25,50 50,50 T100,50 T150,50 T200,50 T250,50 T300,50 T350,50 T400,50 T450,50 T500,50"); }
-            100% { d: path("M0,50 Q25,50 50,50 T100,50 T150,50 T200,50 T250,50 T300,50 T350,50 T400,50 T450,50 T500,50"); }
+        /* Wir animieren die Skalierung auf der Y-Achse, das ist am stabilsten */
+        @keyframes pulseLine {
+            0% { transform: scaleY(0.1); transform-origin: center; }
+            20% { transform: scaleY(1); transform-origin: center; } /* Beat */
+            40% { transform: scaleY(0.3); transform-origin: center; }
+            50% { transform: scaleY(0.8); transform-origin: center; } /* Nachhall */
+            100% { transform: scaleY(0.1); transform-origin: center; }
         }
 
         /* --- VISUALS: ASTRO --- */
@@ -127,14 +131,30 @@
             margin: 3rem auto; text-align: center; border: 1px solid var(--accent-color);
             max-width: 700px;
         }
+        /* FIX FÜR DATUMSFELDER */
         .input-wrapper { display: flex; gap: 20px; justify-content: center; margin: 30px 0; flex-wrap: wrap; }
-        .date-field label { display: block; font-size: 0.9rem; margin-bottom: 8px; font-weight: 600; color: var(--accent-color); }
-        input[type="date"] { padding: 12px; border-radius: 8px; border: 1px solid #ddd; width: 160px; }
-
-        /* Processing Animation */
-        .processing-steps { margin: 20px 0; font-family: monospace; font-size: 0.9rem; color: var(--accent-color); min-height: 20px;}
+        .date-field { 
+            flex: 1; 
+            min-width: 250px; /* Verhindert dass sie zu klein sind */
+        }
+        .date-field label { display: block; font-size: 1rem; margin-bottom: 10px; font-weight: 700; color: var(--accent-color); }
+        
+        /* Grosses, deutliches Input Feld */
+        input[type="date"] { 
+            padding: 15px; 
+            border-radius: 10px; 
+            border: 2px solid #ddd; 
+            width: 100%; 
+            font-size: 1rem;
+            background: white;
+            color: #333;
+            font-family: 'Montserrat', sans-serif;
+            cursor: pointer;
+        }
+        input[type="date"]:focus { border-color: var(--accent-color); outline: none; }
 
         /* Result Box */
+        #tech-output { margin: 20px 0; font-family: monospace; font-size: 0.9rem; color: var(--accent-color); min-height: 20px;}
         #karma-result { display: none; margin-top: 30px; }
         .blurred-text {
             filter: blur(5px); user-select: none; opacity: 0.7; margin: 15px 0;
@@ -146,11 +166,18 @@
         }
         body:not(.astro-mode) .teaser-box { background: rgba(0,0,0,0.8); }
 
-        /* --- SHOWCASE GRID --- */
+        /* --- SHOWCASE GRID & PRODUCT HIGHLIGHT --- */
         .showcase { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem; margin-top: 3rem; }
-        .card { background: var(--card-bg); padding: 2rem; border-radius: 20px; text-align: center; border: 1px solid rgba(255,255,255,0.1); }
+        .card { background: var(--card-bg); padding: 2rem; border-radius: 20px; text-align: center; border: 1px solid rgba(255,255,255,0.1); transition: 0.5s; }
         body.astro-mode .card { border: 1px solid rgba(0,0,0,0.05); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
         .card h3 { margin: 1rem 0 0.5rem; color: var(--accent-color); }
+
+        /* Highlight Klasse für das Astro Produkt nach dem Test */
+        .highlight-product {
+            border: 2px solid var(--accent-color) !important;
+            box-shadow: 0 0 30px rgba(197, 160, 89, 0.4) !important;
+            transform: scale(1.05);
+        }
 
         /* Footer */
         footer { text-align: center; padding: 2rem; border-top: 1px solid rgba(255,255,255,0.1); opacity: 0.6; font-size: 0.8rem; }
@@ -189,12 +216,9 @@
         <div class="showcase">
             <div class="card">
                 <div class="visual-sound single-line-container">
-                    <svg viewBox="0 0 500 100" class="waveform" width="100%" height="100%">
-                        <path d="M0,50 Q25,50 50,50 T100,50 T150,50 T200,50 T250,50 T300,50 T350,50 T400,50 T450,50 T500,50" 
-                              stroke="var(--accent-color)" 
-                              fill="transparent" 
-                              stroke-width="3" />
-                    </svg>
+                   <svg viewBox="0 0 200 100" width="100%" height="100%">
+                       <polyline points="0,50 20,50 30,20 40,80 50,30 60,70 70,50 200,50" class="waveform-line" />
+                   </svg>
                 </div>
                 <h3>Tattoo Template</h3>
                 <p>Minimalistische Linien als Vorlage für den Tätowierer.</p>
@@ -219,7 +243,7 @@
         
         <div class="astro-test">
             <h3><i class="fas fa-moon"></i> Seelenverwandten Check</h3>
-            <p style="opacity:0.7; font-size:0.9rem; margin-bottom:20px;">High-Precision Algorithmus basierend auf Planetenkonstellation.</p>
+            <p style="opacity:0.7; font-size:0.9rem; margin-bottom:20px;">High-Precision Algorithmus.</p>
             
             <div class="input-wrapper">
                 <div class="date-field">
@@ -227,7 +251,7 @@
                     <input type="date" id="dateHuman">
                 </div>
                 <div class="date-field">
-                    <label>Geburtstag deiner Fellnase</label>
+                    <label>Geburtstag des Hundes</label>
                     <input type="date" id="dateDog">
                 </div>
             </div>
@@ -241,19 +265,19 @@
                 <p style="font-weight:bold; margin-bottom:10px;">Spiritueller Archetyp: "Der ewige Beschützer"</p>
                 
                 <div class="blurred-text">
-                    Lorem ipsum dolor sit amet, basierend auf dem Mondknoten im siebten Haus zeigt sich eine tiefe karmische Verbindung, die bereits im vorletzten Leben besiegelt wurde. Eure Energiezentren resonieren auf einer Frequenz von 432Hz, was sehr selten ist.
+                    Lorem ipsum dolor sit amet, basierend auf dem Mondknoten im siebten Haus zeigt sich eine tiefe karmische Verbindung.
                 </div>
                 
                 <div class="teaser-box">
                     <p style="font-weight:bold; color:var(--accent-color); margin-bottom:10px;">⚠️ Detaillierte Analyse erforderlich</p>
-                    <p style="font-size:0.9rem;">Die spezifische Planeten-Position fehlt für den vollständigen Report. Um das Zertifikat zu erstellen, benötigen wir weitere Daten.</p>
+                    <p style="font-size:0.9rem;">Die spezifische Planeten-Position fehlt für den vollständigen Report.</p>
                     <a href="#order" class="cta-btn" style="font-size:0.8rem; padding:10px 20px;">Vollständigen Report freischalten</a>
                 </div>
             </div>
         </div>
 
-        <div class="showcase" id="astro-product" style="display:none;">
-            <div class="card" style="max-width: 500px; margin: 0 auto;">
+        <div class="showcase">
+            <div class="card" id="astro-product-card" style="max-width: 500px; margin: 0 auto; opacity: 0.7;">
                 <div class="visual-astro">
                     <i class="fas fa-star star" style="top:20%; left:20%"></i>
                     <i class="fas fa-star star" style="top:50%; left:50%; font-size:20px"></i>
@@ -265,7 +289,7 @@
                     </svg>
                 </div>
                 <h3>Karma Chart (Gedruckt)</h3>
-                <p>Deine persönliche Analyse auf 310g Fine Art Papier. Das schönste Zertifikat eurer Freundschaft.</p>
+                <p>Deine persönliche Analyse auf 310g Fine Art Papier.</p>
                 <br>
                 <a href="#order" class="cta-btn" style="font-size:0.8rem;">Jetzt bestellen</a>
             </div>
@@ -278,25 +302,18 @@
         <p id="order-desc" style="margin-bottom:2rem; opacity:0.7;">Lade deine Audio-Datei hoch.</p>
         
         <div style="background: white; padding:20px; border-radius:20px; max-width:800px; margin: 0 auto; min-height: 500px;">
-            
             <div id="form-container">
                 <iframe src="https://form.jotform.com/253183756171056" style="width:100%; height:500px; border:none;"></iframe>
             </div>
-
         </div>
     </section>
 
-    <footer>
-        SOULPAW &copy; 2024. All rights reserved.
-    </footer>
+    <footer>SOULPAW &copy; 2024. All rights reserved.</footer>
 
     <script>
         let hasCalculated = false;
-
-        // --- HIER DEINE JOTFORM LINKS EINTRAGEN ---
         const formSoundLink = "https://form.jotform.com/253183756171056"; 
-        // Falls du noch kein Astro-Formular hast, benutze erstmal das gleiche oder erstelle ein neues bei JotForm
-        const formAstroLink = "https://form.jotform.com/253183756171056"; 
+        const formAstroLink = "https://form.jotform.com/253183756171056"; // Hier ggf. ID ändern
 
         function switchMode(mode) {
             const body = document.body;
@@ -305,8 +322,6 @@
             const heroAstro = document.getElementById('hero-astro');
             const sectionSound = document.getElementById('content-sound');
             const sectionAstro = document.getElementById('content-astro');
-            
-            // Formular Bereich
             const orderTitle = document.getElementById('order-title');
             const orderDesc = document.getElementById('order-desc');
             const formContainer = document.getElementById('form-container');
@@ -314,29 +329,21 @@
             btns.forEach(b => b.classList.remove('active'));
 
             if(mode === 'astro') {
-                // AKTIVIERE ASTRO
                 body.classList.add('astro-mode');
                 btns[1].classList.add('active');
                 heroSound.style.display = 'none'; heroAstro.style.display = 'block';
                 sectionSound.classList.remove('active'); sectionAstro.classList.add('active');
-                
-                // Text anpassen
                 orderTitle.innerText = "Unlock Cosmic Data";
                 orderDesc.innerText = "Bestelle jetzt deinen vollständigen Report.";
-                // Iframe austauschen
                 formContainer.innerHTML = `<iframe src="${formAstroLink}" style="width:100%; height:500px; border:none;"></iframe>`;
                 
             } else {
-                // AKTIVIERE SOUND
                 body.classList.remove('astro-mode');
                 btns[0].classList.add('active');
                 heroSound.style.display = 'block'; heroAstro.style.display = 'none';
                 sectionSound.classList.add('active'); sectionAstro.classList.remove('active');
-
-                // Text anpassen
                 orderTitle.innerText = "Create Soundwave";
                 orderDesc.innerText = "Lade deine Audio-Datei hoch.";
-                // Iframe austauschen
                 formContainer.innerHTML = `<iframe src="${formSoundLink}" style="width:100%; height:500px; border:none;"></iframe>`;
             }
         }
@@ -350,7 +357,7 @@
             const output = document.getElementById('tech-output');
 
             if(!hDate || !dDate) {
-                alert("Bitte Daten eingeben für Synchronisation.");
+                alert("Bitte beide Geburtstage eingeben.");
                 return;
             }
 
@@ -359,14 +366,7 @@
             btn.style.opacity = "0.5";
             btn.innerText = "Verschlüssele Daten...";
 
-            // Fake Tech Steps
-            const steps = [
-                "Verbinde mit NASA Ephemeriden...",
-                "Berechne Mondknoten...",
-                "Analysiere Frequenz...",
-                "Synchronisation abgeschlossen."
-            ];
-
+            const steps = ["Verbinde mit NASA Ephemeriden...", "Berechne Mondknoten...", "Synchronisation..."];
             let i = 0;
             let interval = setInterval(() => {
                 output.innerText = "> " + steps[i];
@@ -382,14 +382,16 @@
             document.getElementById('calcBtn').style.display = 'none';
             document.getElementById('tech-output').style.display = 'none';
             
-            // Ergebnis zeigen
             const resultBox = document.getElementById('karma-result');
             resultBox.style.display = 'block';
             resultBox.style.animation = "fadeIn 1s";
 
-            // Produkt Karte zeigen (Das "Papier")
-            document.getElementById('astro-product').style.display = 'grid';
-            // Automatisch zum Ergebnis scrollen
+            // HIGHLIGHT CHART EFFECT
+            const chartCard = document.getElementById('astro-product-card');
+            chartCard.classList.add('highlight-product');
+            chartCard.style.opacity = "1"; // Volle Sichtbarkeit
+            
+            // Scrollen
             resultBox.scrollIntoView({behavior: "smooth"});
         }
     </script>
