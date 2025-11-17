@@ -91,57 +91,56 @@
         .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.3); }
         .cta-btn:disabled { background: #ccc; cursor: not-allowed; transform: none; }
 
-        /* --- SECTIONS --- */
-        .content-section { display: none; padding: 4rem 5%; }
-        .content-section.active { display: block; animation: fadeIn 0.8s; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        /* --- SECTIONS (NEU: Scroll Fade-In) --- */
+        .content-section, .faq-section, #order, footer {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .content-section.is-visible, 
+        .faq-section.is-visible, 
+        #order.is-visible, 
+        footer.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-        /* --- VISUALS: SOUND WAVE WITH PAW (NEW) --- */
+        .content-section { display: none; padding: 4rem 5%; }
+        .content-section.active { display: block; }
+        
+        /* --- VISUALS: SOUND WAVE (Mit Paw) --- */
         .visual-sound-container {
             height: 180px; display: flex; align-items: center; justify-content: center;
             background: #000; border-radius: 12px; overflow: hidden; border: 1px solid #333;
             position: relative;
-            padding-left: 10px; /* Platz für Pfote links */
+            padding-left: 10px;
         }
         
-        /* Die Pfote am Anfang */
         .paw-start {
             position: absolute;
-            left: 15%; /* Positioniert die Pfote */
+            left: 15%;
             color: var(--accent-color);
             font-size: 1.2rem;
             z-index: 2;
             opacity: 0.9;
+            transition: text-shadow 0.3s ease;
         }
 
-        /* Die Linie */
-        .waveform-svg {
-            width: 100%;
-            height: 100%;
-            margin-left: 10px; /* Kleiner Abstand zur Pfote */
-        }
-
+        .waveform-svg { width: 100%; height: 100%; margin-left: 10px; }
         .waveform-path {
             fill: none;
             stroke: var(--accent-color);
-            stroke-width: 1.5px; /* Fine Line Style */
+            stroke-width: 1.5px;
             stroke-linecap: round;
             stroke-linejoin: round;
             vector-effect: non-scaling-stroke;
             animation: barkAnimation 2.5s infinite ease-in-out;
+            transition: animation-duration 0.3s ease;
         }
-
-        /* Die Animation: Von flach zu zackig (Bellen) zu flach */
         @keyframes barkAnimation {
             0% { d: path("M0,50 L30,50 L35,50 L40,50 L45,50 L50,50 L55,50 L60,50 L65,50 L70,50 L75,50 L80,50 L100,50"); }
-            
-            /* Das Bellen (Zackig) */
             10% { d: path("M0,50 L30,50 L35,20 L40,80 L45,10 L50,90 L55,30 L60,70 L65,40 L70,60 L75,50 L80,50 L100,50"); }
-            
-            /* Ausklingen */
             20% { d: path("M0,50 L30,50 L35,45 L40,55 L45,48 L50,52 L55,50 L60,50 L65,50 L70,50 L75,50 L80,50 L100,50"); }
-            
-            /* Stille */
             40% { d: path("M0,50 L30,50 L35,50 L40,50 L45,50 L50,50 L55,50 L60,50 L65,50 L70,50 L75,50 L80,50 L100,50"); }
             100% { d: path("M0,50 L30,50 L35,50 L40,50 L45,50 L50,50 L55,50 L60,50 L65,50 L70,50 L75,50 L80,50 L100,50"); }
         }
@@ -171,9 +170,20 @@
         }
         input[type="date"]:focus { border-color: var(--accent-color); outline: none; }
 
-        #tech-output { margin: 20px 0; font-family: monospace; font-size: 0.85rem; color: var(--accent-color); min-height: 20px;}
+        #tech-output { 
+            margin: 20px 0; font-family: monospace; font-size: 0.85rem; 
+            color: var(--accent-color); min-height: 20px;
+        }
+        /* NEU: Tipp-Cursor */
+        .typing-cursor {
+            display: inline-block;
+            width: 8px; height: 1em;
+            background-color: var(--accent-color);
+            animation: blink 0.7s infinite;
+        }
+        @keyframes blink { 50% { opacity: 0; } }
+
         #karma-result { display: none; margin-top: 30px; }
-        
         .blurred-text {
             filter: blur(4px); user-select: none; opacity: 0.6; margin: 15px 0;
             font-family: 'Times New Roman', serif; font-style: italic;
@@ -186,17 +196,53 @@
         }
         body:not(.astro-mode) .teaser-box { background: rgba(20,20,20,0.95); }
 
+        /* NEU: Share Buttons */
+        .share-buttons { 
+            margin-top: 25px; 
+            display: flex; gap: 10px; justify-content: center; 
+        }
+        .share-btn {
+            padding: 10px 18px; border-radius: 20px; text-decoration: none;
+            font-weight: 600; font-size: 0.8rem; display: inline-flex;
+            align-items: center; gap: 8px;
+        }
+        .share-btn.whatsapp { background: #25D366; color: white; }
+        .share-btn.insta { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); color: white; }
+
+
         /* --- SHOWCASE & HIGHLIGHT --- */
         .showcase { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 3rem; }
-        .card { background: var(--card-bg); padding: 2rem; border-radius: 15px; text-align: center; border: 1px solid rgba(255,255,255,0.1); transition: 0.5s; }
+        
+        /* NEU: 3D Tilt Effekt */
+        .card { 
+            background: var(--card-bg); padding: 2rem; border-radius: 15px; 
+            text-align: center; border: 1px solid rgba(255,255,255,0.1); 
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            transform: perspective(1000px); /* Setzt 3D Perspektive */
+        }
+        .card:hover {
+            transform: perspective(1000px) rotateY(3deg) rotateX(3deg) scale(1.03);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
         body.astro-mode .card { border: 1px solid rgba(0,0,0,0.08); box-shadow: 0 5px 20px rgba(0,0,0,0.03); }
         .card h3 { margin: 1.5rem 0 0.5rem; color: var(--accent-color); font-size: 1.2rem; }
         .card p { font-size: 0.95rem; opacity: 0.8; }
+
+        /* NEU: Interaktive Soundwelle Hover */
+        #content-sound .card:first-child:hover .waveform-path {
+            animation-duration: 0.5s; /* Schnellerer Puls */
+        }
+        #content-sound .card:first-child:hover .paw-start {
+            text-shadow: 0 0 15px var(--accent-color), 0 0 25px var(--accent-color); /* Leuchten */
+        }
 
         .highlight-product {
             border: 2px solid var(--accent-color) !important;
             box-shadow: 0 0 30px rgba(197, 160, 89, 0.3) !important;
             transform: scale(1.02);
+        }
+        .highlight-product:hover {
+            transform: scale(1.05); /* Stärkerer Hover für das Highlight */
         }
 
         /* Steps List */
@@ -204,8 +250,65 @@
         .steps-list li { margin-bottom: 15px; display: flex; align-items: flex-start; gap: 10px; }
         .steps-list i { color: var(--accent-color); margin-top: 5px; }
 
+        /* NEU: FAQ Sektion */
+        .faq-section {
+            padding: 4rem 5%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        details {
+            background: var(--card-bg);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+        body.astro-mode details { border-color: rgba(0,0,0,0.1); }
+        summary {
+            padding: 1.2rem;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1.1rem;
+            list-style: none; /* Dreieck entfernen */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        summary::after {
+            content: '+';
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            font-family: 'Montserrat', sans-serif;
+        }
+        details[open] summary::after { content: '−'; }
+        details div {
+            padding: 0 1.2rem 1.2rem 1.2rem;
+            opacity: 0.8;
+            font-size: 0.95rem;
+        }
+        
+        /* NEU: Sternenstaub Cursor */
+        .stardust {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 1;
+            animation: fadeOut 0.8s forwards;
+            transform: translate(-50%, -50%);
+        }
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.3);
+            }
+        }
+
+
         /* Footer */
-        footer { text-align: center; padding: 2rem; border-top: 1px solid rgba(255,255,255,0.1); opacity: 0.6; font-size: 0.8rem; margin-top: 4rem;}
+        footer { text-align: center; padding: 2rem; border-top: 1px solid rgba(255,255,255,0.1); opacity: 0.6; font-size: 0.8rem; margin-top: 2rem;}
         body.astro-mode footer { border-top: 1px solid rgba(0,0,0,0.1); }
     </style>
 </head>
@@ -240,7 +343,7 @@
         </div>
     </header>
 
-    <section id="content-sound" class="content-section active">
+    <section id="content-sound" class="content-section active fade-in-section">
         <h2 style="text-align:center;">The Sound of Love</h2>
         <p style="text-align:center; opacity:0.7; max-width: 600px; margin: 0 auto 30px auto;">
             Mehr als nur ein Bild. Es ist die visuelle Frequenz der Stimme, die dich jeden Tag begrüßt.
@@ -248,7 +351,7 @@
         </p>
 
         <div style="display: flex; flex-wrap: wrap; gap: 40px; justify-content: center; margin-bottom: 4rem;">
-            <ul class="steps-list">
+             <ul class="steps-list">
                 <li>
                     <i class="fas fa-microphone-alt"></i>
                     <div>
@@ -274,7 +377,7 @@
         </div>
         
         <div class="showcase">
-            <div class="card">
+            <div class="card fade-in-section">
                 <div class="visual-sound-container">
                     <i class="fas fa-paw paw-start"></i>
                     <svg class="waveform-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
@@ -288,7 +391,7 @@
                 <a href="#order" class="cta-btn" style="font-size:0.8rem; padding:10px 20px;">Vorlage erstellen</a>
             </div>
 
-            <div class="card">
+            <div class="card fade-in-section" style="transition-delay: 100ms;">
                 <div style="height:180px; background:#222; border-radius:12px; display:flex; flex-direction:column; align-items:center; justify-content:center; border:1px solid #444;">
                     <i class="fas fa-qrcode" style="font-size:3rem; color:var(--accent-color); margin-bottom:10px;"></i>
                     <span style="font-size:0.7rem; text-transform:uppercase; letter-spacing:1px;">Scan & Listen</span>
@@ -301,7 +404,7 @@
         </div>
     </section>
 
-    <section id="content-astro" class="content-section">
+    <section id="content-astro" class="content-section fade-in-section">
         <h2 style="text-align:center;">Die Seelen-Formel</h2>
         <p style="text-align:center; opacity:0.7; max-width: 600px; margin: 0 auto;">
             Gib eure Geburtsdaten ein. Unser Algorithmus berechnet eure karmische Übereinstimmung basierend auf Sonnenzeichen und Numerologie.
@@ -338,11 +441,20 @@
                     <p style="font-size:0.9rem;">Das ist nur der Anfang. Die vollständige Auswertung inkl. Charakter-Chart und Kraft-Farben erhältst du im Zertifikat.</p>
                     <a href="#order" class="cta-btn" style="font-size:0.8rem; padding:10px 20px;">Vollständigen Report bestellen</a>
                 </div>
+
+                <div class="share-buttons">
+                    <a href="#" id="share-wa" class="share-btn whatsapp" target="_blank">
+                        <i class="fab fa-whatsapp"></i> Teilen
+                    </a>
+                    <a href="https://www.instagram.com/" id="share-ig" class="share-btn insta" target="_blank">
+                        <i class="fab fa-instagram"></i> Posten
+                    </a>
+                </div>
             </div>
         </div>
 
         <div class="showcase">
-            <div class="card" id="astro-product-card" style="max-width: 500px; margin: 0 auto; opacity: 0.6;">
+            <div class="card fade-in-section" id="astro-product-card" style="max-width: 500px; margin: 0 auto; opacity: 0.6;">
                 <div class="visual-astro">
                     <i class="fas fa-star star" style="top:20%; left:20%"></i>
                     <i class="fas fa-star star" style="top:50%; left:50%; font-size:20px"></i>
@@ -362,7 +474,37 @@
 
     </section>
 
-    <section id="order" style="padding: 5rem 5%; text-align:center; background: var(--secondary-bg);">
+    <section class="faq-section fade-in-section">
+        <h2 style="text-align:center; margin-bottom: 2rem;">Häufige Fragen</h2>
+        
+        <details>
+            <summary>Wie mache ich die perfekte Audio-Aufnahme?</summary>
+            <div>
+                <p>Am besten in einem ruhigen Raum. Halte das Handy-Mikrofon ca. 30cm entfernt und versuche, ein einzelnes, klares "Wuff" aufzunehmen. Eine Videoaufnahme funktioniert genauso gut!</p>
+            </div>
+        </details>
+        <details>
+            <summary>Was ist, wenn mein Hund schon verstorben ist?</summary>
+            <div>
+                <p>Das tut uns sehr leid. Oft finden sich die schönsten Aufnahmen in alten Handy-Videos (z.B. vom Spielen oder aus dem Urlaub). Wir können die Tonspur aus jedem Video extrahieren, solange das Bellen zu hören ist.</p>
+            </div>
+        </details>
+        <details>
+            <summary>Ich kenne das Geburtsdatum meines Hundes nicht.</summary>
+            <div>
+                <p>Kein Problem! Nimm für den Astro-Check einfach das "Gotcha-Datum" – also den Tag, an dem er zu dir gekommen ist. Das ist der Beginn eurer gemeinsamen Reise und astrologisch genauso kraftvoll.</p>
+            </div>
+        </details>
+        <details>
+            <summary>Wie funktioniert das mit dem QR-Code Poster?</summary>
+            <div>
+                <p>Wir laden deine Audio-Datei sicher hoch und erstellen einen privaten Link. Dieser Link wird in einen QR-Code umgewandelt und dezent auf dein Poster gedruckt. Wenn du ihn mit deiner Handy-Kamera scannst, wird das Bellen sofort abgespielt.</p>
+            </div>
+        </details>
+    </section>
+
+
+    <section id="order" class="fade-in-section">
         <h2 id="order-title">Start Creation</h2>
         <p id="order-desc" style="margin-bottom:2rem; opacity:0.7;">Lade deine Audio-Datei hoch.</p>
         
@@ -373,7 +515,7 @@
         </div>
     </section>
 
-    <footer>SOULPAW &copy; 2024. All rights reserved.</footer>
+    <footer class="fade-in-section">SOULPAW &copy; 2024. All rights reserved.</footer>
 
     <script>
         let hasCalculated = false;
@@ -413,7 +555,6 @@
             }
         }
 
-        // --- DETERMINISTISCHE LOGIK (IMMER GLEICH BEI GLEICHEM DATUM) ---
         function calculateDeterministicKarma() {
             if(hasCalculated) return;
 
@@ -433,46 +574,40 @@
             btn.innerText = "Analysiere Sterne...";
 
             const steps = ["Verbinde mit NASA Ephemeriden...", "Berechne Mondknoten...", "Synchronisiere Schwingung...", "Match gefunden."];
-            let i = 0;
-            let interval = setInterval(() => {
-                output.innerText = "> " + steps[i];
-                i++;
-                if(i >= steps.length) {
-                    clearInterval(interval);
-                    showResults(hDate, dDate); // Daten übergeben für Berechnung
-                }
-            }, 800);
+            
+            // NEU: Tipp-Effekt
+            typewriterEffect(steps, output, () => {
+                showResults(hDate, dDate); 
+            });
         }
 
         function showResults(date1, date2) {
             document.getElementById('calcBtn').style.display = 'none';
             document.getElementById('tech-output').style.display = 'none';
             
-            // 1. Erstelle einen "Hash" aus den Strings (einfache Quersumme)
-            // Damit ist das Ergebnis bei gleichen Daten IMMER gleich.
             let combinedString = date1 + date2;
             let hash = 0;
             for (let i = 0; i < combinedString.length; i++) {
                 hash += combinedString.charCodeAt(i);
             }
 
-            // 2. Berechne Prozent (zwischen 88% und 99%) basierend auf Hash
             const minPercent = 88;
             const percent = minPercent + (hash % (100 - minPercent));
 
-            // 3. Wähle Archetyp basierend auf Hash
             const archetypes = [
-                "Der ewige Beschützer",
-                "Die Zwillings-Seele",
-                "Der treue Weggefährte",
-                "Der kosmische Spiegel",
-                "Die heilende Energie"
+                "Der ewige Beschützer", "Die Zwillings-Seele", "Der treue Weggefährte",
+                "Der kosmische Spiegel", "Die heilende Energie"
             ];
             const archetype = archetypes[hash % archetypes.length];
 
-            // 4. Setze Texte
+            // Setze Texte
             document.getElementById('result-percent').innerText = percent + "% MATCH";
             document.getElementById('result-archetype').innerText = "Spiritueller Archetyp: " + archetype;
+
+            // NEU: Share-Button Links aktualisieren
+            const shareText = `Wow! Mein Hund und ich sind ein ${percent}% Seelen-Match! 🐾✨ Unser Archetyp ist "${archetype}". Mach den Test auch auf soulpaw.com!`;
+            document.getElementById('share-wa').href = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`;
+            // (Instagram teilt keinen Text, öffnet nur die App)
 
             // Anzeigen
             const resultBox = document.getElementById('karma-result');
@@ -483,9 +618,89 @@
             chartCard.classList.add('highlight-product');
             chartCard.style.opacity = "1"; 
             
-            resultBox.scrollIntoView({behavior: "smooth"});
+            resultBox.scrollIntoView({behavior: "smooth", block: "center"});
         }
-    </script>
+        
+        // --- NEU: Tipp-Effekt Funktion ---
+        function typewriterEffect(steps, outputElement, callback) {
+            let stepIndex = 0;
+            let charIndex = 0;
+            outputElement.innerHTML = "> <span class='typing-cursor'></span>";
 
+            function typeStep() {
+                if(stepIndex >= steps.length) {
+                    callback(); // Alle Schritte getippt
+                    return;
+                }
+                
+                const currentStep = steps[stepIndex];
+                if (charIndex < currentStep.length) {
+                    outputElement.innerHTML = `> ${currentStep.substring(0, charIndex + 1)}<span class='typing-cursor'></span>`;
+                    charIndex++;
+                    setTimeout(typeStep, 30); // Tipp-Geschwindigkeit
+                } else {
+                    // Warte kurz, dann nächste Zeile
+                    stepIndex++;
+                    charIndex = 0;
+                    setTimeout(() => {
+                        outputElement.innerHTML += "<br>"; // Nächste Zeile
+                        typeStep();
+                    }, 500); // Pause zwischen Zeilen
+                }
+            }
+            typeStep(); // Startet den Effekt
+        }
+
+        // --- NEU: Smooth Scroll für ALLE Anker-Links ---
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if(targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start' 
+                    });
+                }
+            });
+        });
+        
+        // --- NEU: Intersection Observer (Scroll-Fade-In) ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    // Optional: observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 }); // 10% sichtbar
+
+        // Alle Sektionen beobachten
+        document.querySelectorAll('.fade-in-section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // --- NEU: Sternenstaub Maus-Cursor ---
+        document.addEventListener('mousemove', function(e) {
+            if (document.body.classList.contains('astro-mode')) {
+                let dust = document.createElement('div');
+                dust.className = 'stardust';
+                document.body.appendChild(dust);
+
+                dust.style.left = e.pageX + 'px';
+                dust.style.top = e.pageY + 'px';
+                
+                // Partikel streuen
+                dust.style.transform = `translate(-50%, -50%) translate(${Math.random()*20-10}px, ${Math.random()*20-10}px)`;
+
+                setTimeout(() => {
+                    dust.remove();
+                }, 800);
+            }
+        });
+        
+    </script>
 </body>
 </html>
