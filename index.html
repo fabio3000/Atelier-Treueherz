@@ -3,784 +3,218 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SOULPAW | The Invisible Bond</title>
+    <title>Ewige Pfote | Dein Seelenband</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;600&family=Dancing+Script:wght@500&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
-        /* --- THEMES --- */
+        /* --- NEUE FARBWELT: PREMIUM BOUTIQUE (40J+) --- */
         :root {
-            --bg-color: #0a0a0a;
-            --text-color: #f0f0f0;
-            --accent-color: #9b59b6; /* Ein etwas edleres Lila */
-            --secondary-bg: #141414;
-            --card-bg: rgba(255,255,255,0.03);
-            --btn-text: #fff;
+            --bg-color: #FDFBF7;         /* Weiches Creme-Weiß (wie handgeschöpftes Papier) */
+            --text-color: #3E3B39;       /* Warmes Dunkelbraun/Anthrazit (statt hartem Schwarz) */
+            --accent-gold: #B08D57;      /* Gedecktes, altes Gold (für Astro & Luxus) */
+            --accent-green: #4A5D50;     /* Tiefes, sattes Waldgrün (für Sound & Ewigkeit) */
+            --card-border: #EAE3D9;     /* Sanfte Trennlinie */
         }
 
-        body.astro-mode {
-            --bg-color: #fffbf5; /* Warmes Creme */
-            --text-color: #2c3e50;
-            --accent-color: #c5a059; /* Gold */
-            --secondary-bg: #fff;
-            --card-bg: #fff;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        /* --- SMOOTH SCROLL --- */
         html {
             scroll-behavior: smooth;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; transition: background 0.5s ease, color 0.3s ease; }
-
         body {
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Montserrat', sans-serif; /* Klar lesbar */
+            font-weight: 300;
             background-color: var(--bg-color);
             color: var(--text-color);
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
-        /* Verhindert Scrollen, wenn Modal offen ist */
-        body.modal-open {
-            overflow: hidden;
+            line-height: 1.7;
         }
 
-        h1, h2, h3 { font-family: 'Cinzel', serif; letter-spacing: 1px; }
+        h1, h2, h3 {
+            font-family: 'Cormorant Garamond', serif; /* Elegante Serifenschrift */
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
 
-        /* --- NEU: WELCOME MODAL --- */
-        .welcome-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(15px);
-            z-index: 9999;
-            display: none; /* Wird per JS auf flex gesetzt */
-            align-items: center;
+        .handwriting {
+            font-family: 'Dancing Script', cursive; /* Emotionale Handschrift */
+            color: var(--accent-gold);
+            font-weight: 500;
+            font-size: 1.8rem;
+        }
+
+        /* --- NEUER HERO: Die "Vitrine" --- */
+        .hero-split {
+            display: flex;
+            min-height: 90vh;
+        }
+        
+        .hero-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
             justify-content: center;
-            animation: fadeIn 0.5s;
+            align-items: center;
+            padding: 3rem;
+            text-align: center;
+            transition: 0.5s;
         }
-        .modal-content {
+        
+        .hero-panel:hover {
+            flex: 1.1; /* Sanfter Zoom-Effekt bei Hover */
+        }
+
+        /* Panel 1: Sound (mit dunklem Grün) */
+        .panel-sound {
+            background-color: var(--accent-green);
+            color: var(--bg-color); /* Helle Schrift auf dunklem Grund */
+        }
+        .panel-sound h2 { color: var(--bg-color); }
+        .panel-sound .handwriting { color: #d4c2a4; } /* Helles Gold */
+        .panel-sound .btn { border-color: var(--bg-color); color: var(--bg-color); }
+        .panel-sound .btn:hover { background: var(--bg-color); color: var(--accent-green); }
+
+        /* Panel 2: Astro (mit hellem Creme) */
+        .panel-astro {
+            background-color: var(--bg-color);
+        }
+        .panel-astro h2 { color: var(--text-color); }
+        .panel-astro .handwriting { color: var(--accent-gold); }
+        .panel-astro .btn { border-color: var(--accent-gold); color: var(--accent-gold); }
+        .panel-astro .btn:hover { background: var(--accent-gold); color: var(--bg-color); }
+
+        .hero-panel h2 {
+            font-size: 2.5rem;
+            margin-top: 1rem;
+        }
+        .hero-panel p {
+            font-size: 1rem;
+            max-width: 400px;
+            margin: 1rem 0 2rem;
+            opacity: 0.9;
+        }
+
+        /* --- Der neue Button-Stil: Elegant & Zurückhaltend --- */
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border: 2px solid;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.3s ease-out;
+            background: transparent;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+
+        /* --- Produktkarten-Vorschau (Wie der Rest der Seite aussehen wird) --- */
+        .product-preview {
+            padding: 5rem 5%;
+            text-align: center;
+        }
+        
+        .product-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 1px;
-            max-width: 900px;
-            width: 90%;
-            border-radius: 20px;
-            overflow: hidden;
-            background: #333;
+            gap: 2.5rem;
+            margin-top: 3rem;
         }
-        .modal-choice {
-            padding: 4rem 2rem;
-            text-align: center;
-            cursor: pointer;
-            transition: transform 0.3s, background 0.3s;
+        
+        .product-card {
+            background: #fff;
+            border: 1px solid var(--card-border);
+            border-radius: 10px;
+            padding: 2.5rem;
+            box-shadow: 0 5px 25px rgba(62, 59, 57, 0.05); /* Sehr sanfter Schatten */
+            transition: 0.3s;
         }
-        .modal-choice:hover {
-            transform: scale(1.03);
+        .product-card:hover {
+            box-shadow: 0 10px 30px rgba(62, 59, 57, 0.1);
+            transform: translateY(-5px);
         }
-        .modal-choice:first-child {
-            background: #111;
-            color: #fff;
-        }
-        .modal-choice:last-child {
-            background: #fffbf5;
-            color: #2c3e50;
-        }
-        .modal-choice i {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-        .modal-choice h2 {
+
+        .product-card h3 {
             font-size: 1.5rem;
-            margin-bottom: 0.5rem;
+            margin: 1rem 0 0.5rem;
         }
-        .modal-choice p {
-            font-size: 0.9rem;
-            opacity: 0.8;
+        /* Grüner Akzent für Sound-Produkt */
+        .product-card.sound h3 { color: var(--accent-green); }
+        /* Goldener Akzent für Astro-Produkt */
+        .product-card.astro h3 { color: var(--accent-gold); }
+
+        .card-icon {
+            font-size: 2.5rem;
         }
-        .modal-choice:first-child h2, .modal-choice:first-child i { color: var(--accent-color); }
-        .modal-choice:last-child h2, .modal-choice:last-child i { color: var(--accent-color); }
+
+        /* Responsive: Stapeln auf dem Handy */
         @media (max-width: 768px) {
-            .modal-content { grid-template-columns: 1fr; }
-        }
-
-
-        /* --- SWITCHER --- */
-        .mode-switch-container {
-            position: fixed; top: 20px; right: 20px; z-index: 2000;
-            background: rgba(0,0,0,0.5); backdrop-filter: blur(10px);
-            padding: 5px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.2);
-            display: flex; gap: 5px;
-        }
-        body.astro-mode .mode-switch-container { background: rgba(255,255,255,0.8); border-color: #ddd; }
-        .switch-btn {
-            padding: 8px 15px; border-radius: 20px; border: none; cursor: pointer;
-            font-size: 0.75rem; font-weight: 700; background: transparent; color: #888;
-        }
-        .switch-btn.active { background: var(--accent-color); color: var(--btn-text); }
-        .brand {
-            position: fixed; top: 20px; left: 5%; z-index: 2000;
-            font-family: 'Cinzel', serif; font-size: 1.4rem; font-weight: 700;
-            letter-spacing: 2px; text-shadow: 0 0 10px rgba(0,0,0,0.5);
-        }
-
-        /* --- HERO --- */
-        .hero {
-            min-height: 90vh; display: flex; align-items: center; justify-content: center;
-            text-align: center; position: relative; padding: 6rem 20px 2rem;
-        }
-        .hero-bg-sound {
-            position: absolute; top:0; left:0; width:100%; height:100%;
-            background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%);
-            z-index: -1; opacity: 1; transition: opacity 0.8s;
-        }
-        .hero-bg-astro {
-            position: absolute; top:0; left:0; width:100%; height:100%;
-            background: radial-gradient(circle at center, #fff 0%, #f3f0ff 100%);
-            z-index: -1; opacity: 0; transition: opacity 0.8s;
-        }
-        body.astro-mode .hero-bg-sound { opacity: 0; }
-        body.astro-mode .hero-bg-astro { opacity: 1; }
-
-        .hero-content { max-width: 700px; position: relative; z-index: 10; }
-        .hero h1 { font-size: 3rem; margin-bottom: 1rem; line-height: 1.2; }
-        .hero p { font-size: 1.1rem; margin-bottom: 2rem; opacity: 0.9; }
-        
-        .cta-btn {
-            padding: 14px 35px; background: var(--accent-color); color: var(--btn-text);
-            border: none; border-radius: 50px; font-weight: 600; text-transform: uppercase; font-size: 0.9rem;
-            cursor: pointer; text-decoration: none; display: inline-block; margin-top: 20px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2); transition: 0.3s; letter-spacing: 1px;
-        }
-        .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.3); }
-        .cta-btn:disabled { background: #ccc; cursor: not-allowed; transform: none; }
-
-        /* --- SECTIONS (Scroll Fade-In) --- */
-        .content-section, .faq-section, #order, footer {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-        .content-section.is-visible, 
-        .faq-section.is-visible, 
-        #order.is-visible, 
-        footer.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .content-section { display: none; padding: 4rem 5%; }
-        .content-section.active { display: block; }
-        
-        /* --- VISUALS: SOUND WAVE (Mit Paw) --- */
-        .visual-sound-container {
-            height: 180px; display: flex; align-items: center; justify-content: center;
-            background: #000; border-radius: 12px; overflow: hidden; border: 1px solid #333;
-            position: relative; padding-left: 10px;
-        }
-        .paw-start {
-            position: absolute; left: 15%; color: var(--accent-color);
-            font-size: 1.2rem; z-index: 2; opacity: 0.9;
-            transition: text-shadow 0.3s ease;
-        }
-        .waveform-svg { width: 100%; height: 100%; margin-left: 10px; }
-        .waveform-path {
-            fill: none; stroke: var(--accent-color); stroke-width: 1.5px;
-            stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke;
-            animation: barkAnimation 2.5s infinite ease-in-out;
-            transition: animation-duration 0.3s ease;
-        }
-        @keyframes barkAnimation {
-            0% { d: path("M0,50 L30,50 L35,50 L40,50 L45,50 L50,50 L55,50 L60,50 L65,50 L70,50 L75,50 L80,50 L100,50"); }
-            10% { d: path("M0,50 L30,50 L35,20 L40,80 L45,10 L50,90 L55,30 L60,70 L65,40 L70,60 L75,50 L80,50 L100,50"); }
-            20% { d: path("M0,50 L30,50 L35,45 L40,55 L45,48 L50,52 L55,50 L60,50 L65,50 L70,50 L75,50 L80,50 L100,50"); }
-            40% { d: path("M0,50 L30,50 L35,50 L40,50 L45,50 L50,50 L55,50 L60,50 L65,50 L70,50 L75,50 L80,50 L100,50"); }
-            100% { d: path("M0,50 L30,50 L35,50 L40,50 L45,50 L50,50 L55,50 L60,50 L65,50 L70,50 L75,50 L80,50 L100,50"); }
-        }
-
-        /* --- VISUALS: ASTRO --- */
-        .visual-astro {
-            height: 200px; display: flex; align-items: center; justify-content: center;
-            background: #fdfbf7; border-radius: 10px; border: 1px solid var(--accent-color);
-            position: relative; overflow: hidden;
-        }
-        .star { position: absolute; color: var(--accent-color); font-size: 10px; }
-
-        /* --- ASTRO TEST --- */
-        .astro-test {
-            background: var(--secondary-bg); padding: 2.5rem; border-radius: 20px;
-            margin: 3rem auto; text-align: center; border: 1px solid var(--accent-color);
-            max-width: 600px; box-shadow: 0 10px 40px rgba(0,0,0,0.05);
-        }
-        .input-wrapper { display: flex; gap: 20px; justify-content: center; margin: 30px 0; flex-wrap: wrap; }
-        .date-field { flex: 1; min-width: 220px; }
-        .date-field label { display: block; font-size: 0.9rem; margin-bottom: 8px; font-weight: 600; color: var(--accent-color); text-transform: uppercase; letter-spacing: 1px;}
-        input[type="date"] { 
-            padding: 12px; border-radius: 8px; border: 1px solid #ddd; width: 100%; 
-            font-size: 1rem; background: white; color: #333; font-family: 'Montserrat', sans-serif; cursor: pointer;
-        }
-        input[type="date"]:focus { border-color: var(--accent-color); outline: none; }
-        #tech-output { 
-            margin: 20px 0; font-family: monospace; font-size: 0.85rem; 
-            color: var(--accent-color); min-height: 20px;
-        }
-        .typing-cursor {
-            display: inline-block; width: 8px; height: 1em;
-            background-color: var(--accent-color);
-            animation: blink 0.7s infinite;
-        }
-        @keyframes blink { 50% { opacity: 0; } }
-        #karma-result { display: none; margin-top: 30px; }
-        .blurred-text {
-            filter: blur(4px); user-select: none; opacity: 0.6; margin: 15px 0;
-            font-family: 'Times New Roman', serif; font-style: italic;
-            background: linear-gradient(to bottom, transparent, var(--bg-color));
-        }
-        .teaser-box {
-            border: 1px dashed var(--accent-color); padding: 20px; margin-top: -30px;
-            position: relative; z-index: 2; background: rgba(255,255,255,0.95);
-            border-radius: 10px;
-        }
-        body:not(.astro-mode) .teaser-box { background: rgba(20,20,20,0.95); }
-        .share-buttons { 
-            margin-top: 25px; display: flex; gap: 10px; justify-content: center; 
-        }
-        .share-btn {
-            padding: 10px 18px; border-radius: 20px; text-decoration: none;
-            font-weight: 600; font-size: 0.8rem; display: inline-flex;
-            align-items: center; gap: 8px;
-        }
-        .share-btn.whatsapp { background: #25D366; color: white; }
-        .share-btn.insta { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); color: white; }
-
-        /* --- SHOWCASE & HIGHLIGHT --- */
-        .showcase { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 3rem; }
-        .card { 
-            background: var(--card-bg); padding: 2rem; border-radius: 15px; 
-            text-align: center; border: 1px solid rgba(255,255,255,0.1); 
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
-            transform: perspective(1000px);
-        }
-        .card:hover {
-            transform: perspective(1000px) rotateY(3deg) rotateX(3deg) scale(1.03);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
-        }
-        body.astro-mode .card { border: 1px solid rgba(0,0,0,0.08); box-shadow: 0 5px 20px rgba(0,0,0,0.03); }
-        .card h3 { margin: 1.5rem 0 0.5rem; color: var(--accent-color); font-size: 1.2rem; }
-        .card p { font-size: 0.95rem; opacity: 0.8; }
-        
-        #content-sound .card:first-child:hover .waveform-path { animation-duration: 0.5s; }
-        #content-sound .card:first-child:hover .paw-start { text-shadow: 0 0 15px var(--accent-color), 0 0 25px var(--accent-color); }
-        
-        .highlight-product {
-            border: 2px solid var(--accent-color) !important;
-            box-shadow: 0 0 30px rgba(197, 160, 89, 0.3) !important;
-            transform: scale(1.02);
-        }
-        .highlight-product:hover { transform: scale(1.05); }
-
-        /* Steps List */
-        .steps-list { text-align: left; margin: 2rem auto; max-width: 500px; list-style: none; }
-        .steps-list li { margin-bottom: 15px; display: flex; align-items: flex-start; gap: 10px; }
-        .steps-list i { color: var(--accent-color); margin-top: 5px; }
-
-        /* --- DYNAMISCHE FAQ SEKTION --- */
-        .faq-section {
-            padding: 4rem 5%;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        details {
-            background: var(--card-bg);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 10px;
-            margin-bottom: 10px;
-        }
-        body.astro-mode details { border-color: rgba(0,0,0,0.1); }
-        summary {
-            padding: 1.2rem; cursor: pointer; font-weight: 700;
-            font-size: 1.1rem; list-style: none; display: flex;
-            justify-content: space-between; align-items: center;
-        }
-        summary::after {
-            content: '+'; font-size: 1.5rem; color: var(--accent-color);
-            font-family: 'Montserrat', sans-serif;
-        }
-        details[open] summary::after { content: '−'; }
-        details div {
-            padding: 0 1.2rem 1.2rem 1.2rem;
-            opacity: 0.8; font-size: 0.95rem;
-        }
-        
-        /* Logik zum Tauschen der FAQs */
-        #faq-astro { display: none; }
-        #faq-sound { display: block; }
-        body.astro-mode #faq-sound { display: none; }
-        body.astro-mode #faq-astro { display: block; }
-
-        
-        /* Sternenstaub Cursor */
-        .stardust {
-            position: fixed; width: 4px; height: 4px;
-            background-color: var(--accent-color); border-radius: 50%;
-            pointer-events: none; z-index: 9999; opacity: 1;
-            animation: fadeOut 0.8s forwards;
-            transform: translate(-50%, -50%);
-        }
-        @keyframes fadeOut {
-            to {
-                opacity: 0;
-                transform: translate(-50%, -50%) scale(0.3);
+            .hero-split {
+                flex-direction: column;
+                min-height: 100vh;
+            }
+            .hero-panel {
+                padding: 4rem 1.5rem;
+            }
+            .product-grid {
+                grid-template-columns: 1fr;
             }
         }
 
-        /* Footer */
-        footer { text-align: center; padding: 2rem; border-top: 1px solid rgba(255,255,255,0.1); opacity: 0.6; font-size: 0.8rem; margin-top: 2rem;}
-        body.astro-mode footer { border-top: 1px solid rgba(0,0,0,0.1); }
     </style>
 </head>
 <body>
 
-    <div class="welcome-modal" id="welcome-modal">
-        <div class="modal-content">
-            <div class="modal-choice" onclick="switchModeAndCloseModal('sound')">
-                <i class="fas fa-wave-square" style="color: #9b59b6;"></i>
-                <h2>Eternal Echo</h2>
-                <p>Verwandle das Bellen deines Hundes in ein minimalistisches Sound-Tattoo oder ein interaktives Poster.</p>
-            </div>
-            <div class="modal-choice" onclick="switchModeAndCloseModal('astro')">
-                <i class="fas fa-star" style="color: #c5a059;"></i>
-                <h2>Cosmic Bond</h2>
-                <p>Entschlüssele die astrologische Seelenverbindung zwischen dir und deinem Hund mit unserem Karma-Check.</p>
-            </div>
+    <nav style="padding: 1.5rem 5%; background: #fff; border-bottom: 1px solid var(--card-border);">
+        <div style="font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 700; text-align: center; color: var(--text-color);">
+            <i class="fas fa-paw" style="color: var(--accent-gold); font-size: 1.5rem; margin-right: 5px;"></i>
+            Ewige Pfote
         </div>
-    </div>
+    </nav>
 
+    <header class="hero-split">
 
-    <div class="brand">SOULPAW</div>
-
-    <div class="mode-switch-container">
-        <button class="switch-btn active" onclick="switchMode('sound')"><i class="fas fa-wave-square"></i> SOUND</button>
-        <button class="switch-btn" onclick="switchMode('astro')"><i class="fas fa-star"></i> ASTRO</button>
-    </div>
-
-    <header class="hero">
-        <div class="hero-bg-sound"></div>
-        <div class="hero-bg-astro"></div>
-
-        <div class="hero-content" id="hero-sound">
-            <h1>ETERNAL<br><span style="color:var(--accent-color)">ECHO</span></h1>
-            <p>
-                Dein Hund. Sein Bellen. Für immer.<br>
-                Wir verwandeln den Klang deiner Fellnase in ein feines, minimalistisches Kunstwerk. 
-                Perfekt als Tattoo-Vorlage oder interaktives Poster.
-            </p>
-            <a href="#content-sound" class="cta-btn">Wie es funktioniert</a>
+        <div class="hero-panel panel-sound">
+            <span class="handwriting">Das ewige Echo</span>
+            <h2>Eternal Echo</h2>
+            <p>Verwandeln Sie das einzigartige Bellen Ihres Hundes in ein minimalistisches "Fine Line" Kunstwerk – für die Wand oder als unvergängliche Tattoo-Vorlage.</p>
+            <a href="#sound-section" class="btn">Klang entdecken</a>
         </div>
 
-        <div class="hero-content" id="hero-astro" style="display:none">
-            <h1>COSMIC<br><span style="color:var(--accent-color)">BOND</span></h1>
-            <p>Steht eure Freundschaft in den Sternen?<br>
-            Unser Algorithmus entschlüsselt die planetare Verbindung zwischen dir und deinem Seelenhund.</p>
-            <a href="#content-astro" class="cta-btn">Check Compatibility</a>
+        <div class="hero-panel panel-astro">
+            <span class="handwriting">Die kosmische Verbindung</span>
+            <h2>Cosmic Bond</h2>
+            <p>Entschlüsseln Sie die spirituelle Seelenverbindung zwischen Ihnen und Ihrem Hund. Unser Algorithmus analysiert eure karmische Kompatibilität.</p>
+            <a href="#astro-section" class="btn">Sterne deuten</a>
         </div>
+
     </header>
 
-    <section id="content-sound" class="content-section active fade-in-section">
-        <h2 style="text-align:center;">The Sound of Love</h2>
-        <p style="text-align:center; opacity:0.7; max-width: 600px; margin: 0 auto 30px auto;">
-            Mehr als nur ein Bild. Es ist die visuelle Frequenz der Stimme, die dich jeden Tag begrüßt.
-            Wir filtern Hintergrundgeräusche und Atemzüge heraus, sodass nur das reine Bellen bleibt.
-        </p>
+    <section class="product-preview" id="sound-section">
+        <h2 style="font-size: 2rem;">Unsere Andenken</h2>
 
-        <div style="display: flex; flex-wrap: wrap; gap: 40px; justify-content: center; margin-bottom: 4rem;">
-             <ul class="steps-list">
-                <li>
-                    <i class="fas fa-microphone-alt"></i>
-                    <div>
-                        <strong>1. Aufnahme machen</strong><br>
-                        Nimm das Bellen einfach mit deinem Handy auf (Video oder Sprachmemo).
-                    </div>
-                </li>
-                <li>
-                    <i class="fas fa-pencil-alt"></i>
-                    <div>
-                        <strong>2. Wir designen</strong><br>
-                        Wir extrahieren die Tonspur und zeichnen die Welle von Hand im "Fine Line" Stil nach.
-                    </div>
-                </li>
-                <li>
-                    <i class="fas fa-heart"></i>
-                    <div>
-                        <strong>3. Dein Unikat</strong><br>
-                        Du erhältst die Datei als Tattoo-Vorlage (PDF) oder als gedrucktes Poster mit QR-Code zum Abspielen.
-                    </div>
-                </li>
-            </ul>
-        </div>
-        
-        <div class="showcase">
-            <div class="card fade-in-section">
-                <div class="visual-sound-container">
-                    <i class="fas fa-paw paw-start"></i>
-                    <svg class="waveform-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
-                        <path class="waveform-path" d="M0,50 L30,50 L35,20 L40,80 L45,10 L50,90 L55,30 L60,70 L65,40 L70,60 L75,50 L80,50 L100,50" />
-                    </svg>
-                </div>
+        <div class="product-grid">
 
-                <h3>Fine Line Tattoo Template</h3>
-                <p>Du erhältst eine hochauflösende Vektordatei. Perfekt für den Tätowierer, um die feine Linie exakt unter die Haut zu bringen. Mit oder ohne Namen.</p>
-                <br>
-                <a href="#order" class="cta-btn" style="font-size:0.8rem; padding:10px 20px;">Vorlage erstellen</a>
+            <div class="product-card sound">
+                <i class="fas fa-wave-square card-icon" style="color: var(--accent-green);"></i>
+                <h3>Soundwave (Echo)</h3>
+                <p>Das Herzstück von "Eternal Echo". Wir extrahieren die Frequenz und erstellen die handgezeichnete Linie, perfekt für Tattoos oder Poster.</p>
             </div>
 
-            <div class="card fade-in-section" style="transition-delay: 100ms;">
-                <div style="height:180px; background:#222; border-radius:12px; display:flex; flex-direction:column; align-items:center; justify-content:center; border:1px solid #444;">
-                    <i class="fas fa-qrcode" style="font-size:3rem; color:var(--accent-color); margin-bottom:10px;"></i>
-                    <span style="font-size:0.7rem; text-transform:uppercase; letter-spacing:1px;">Scan & Listen</span>
-                </div>
-                <h3>Interactive Print</h3>
-                <p>Ein minimalistisches Poster für dein Zuhause. Der Clou: Scanne den kleinen Code auf dem Bild und höre das Bellen sofort auf deinem Handy.</p>
-                <br>
-                <a href="#order" class="cta-btn" style="font-size:0.8rem; padding:10px 20px;">Poster gestalten</a>
+            <div class="product-card astro" id="astro-section">
+                <i class="fas fa-star card-icon" style="color: var(--accent-gold);"></i>
+                <h3>Karma Chart (Bond)</h3>
+                <p>Das Ergebnis Ihrer "Cosmic Bond" Analyse auf 310g Fine Art Papier – ein edles Zertifikat Ihrer einzigartigen Verbindung.</p>
             </div>
+
         </div>
     </section>
 
-    <section id="content-astro" class="content-section fade-in-section">
-        <h2 style="text-align:center;">Die Seelen-Formel</h2>
-        <p style="text-align:center; opacity:0.7; max-width: 600px; margin: 0 auto;">
-            Gib eure Geburtsdaten ein. Unser Algorithmus berechnet eure karmische Übereinstimmung basierend auf Sonnenzeichen und Numerologie.
-        </p>
-        
-        <div class="astro-test">
-            <h3><i class="fas fa-moon"></i> Seelenverwandten Check</h3>
-            
-            <div class="input-wrapper">
-                <div class="date-field">
-                    <label>Dein Geburtstag</label>
-                    <input type="date" id="dateHuman">
-                </div>
-                <div class="date-field">
-                    <label>Geburtstag des Hundes</label>
-                    <input type="date" id="dateDog">
-                </div>
-            </div>
-
-            <div id="tech-output" class="processing-steps"></div>
-
-            <button id="calcBtn" class="cta-btn" onclick="calculateDeterministicKarma()">Analyse starten</button>
-
-            <div id="karma-result">
-                <div id="result-percent" style="font-size:3rem; font-weight:800; color:var(--accent-color); margin-bottom:5px;"></div>
-                <p id="result-archetype" style="font-weight:bold; margin-bottom:15px; text-transform:uppercase; letter-spacing:1px;"></p>
-                
-                <div class="blurred-text">
-                    Lorem ipsum dolor sit amet, die Position des Jupiter im fünften Haus deutet auf eine Verbindung hin, die über dieses Leben hinausgeht. Eure Schwingungsfrequenz liegt bei einer seltenen Resonanz, was bedeutet, dass ihr ohne Worte kommuniziert.
-                </div>
-                
-                <div class="teaser-box">
-                    <p style="font-weight:bold; color:var(--accent-color); margin-bottom:10px;">⚠️ Detaillierte Analyse erforderlich</p>
-                    <p style="font-size:0.9rem;">Das ist nur der Anfang. Die vollständige Auswertung inkl. Charakter-Chart und Kraft-Farben erhältst du im Zertifikat.</p>
-                    <a href="#order" class="cta-btn" style="font-size:0.8rem; padding:10px 20px;">Vollständigen Report bestellen</a>
-                </div>
-
-                <div class="share-buttons">
-                    <a href="#" id="share-wa" class="share-btn whatsapp" target="_blank">
-                        <i class="fab fa-whatsapp"></i> Teilen
-                    </a>
-                    <a href="https://www.instagram.com/" id="share-ig" class="share-btn insta" target="_blank">
-                        <i class="fab fa-instagram"></i> Posten
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="showcase">
-            <div class="card fade-in-section" id="astro-product-card" style="max-width: 500px; margin: 0 auto; opacity: 0.6;">
-                <div class="visual-astro">
-                    <i class="fas fa-star star" style="top:20%; left:20%"></i>
-                    <i class="fas fa-star star" style="top:50%; left:50%; font-size:20px"></i>
-                    <i class="fas fa-star star" style="top:80%; left:70%"></i>
-                    <i class="far fa-moon star" style="top:15%; right:15%; font-size:25px"></i>
-                    <svg style="position:absolute; top:0; left:0; width:100%; height:100%; opacity:0.3;">
-                        <line x1="20%" y1="20%" x2="50%" y2="50%" stroke="var(--accent-color)" stroke-width="1"/>
-                        <line x1="50%" y1="50%" x2="70%" y2="80%" stroke="var(--accent-color)" stroke-width="1"/>
-                    </svg>
-                </div>
-                <h3>Karma Chart (Print)</h3>
-                <p>Deine persönliche Analyse auf 310g Fine Art Papier. Das schönste Zertifikat eurer Freundschaft.</p>
-                <br>
-                <a href="#order" class="cta-btn" style="font-size:0.8rem;">Jetzt bestellen</a>
-            </div>
-        </div>
-
-    </section>
-
-    <section class="faq-section fade-in-section">
-        <h2 style="text-align:center; margin-bottom: 2rem;">Häufige Fragen</h2>
-        
-        <div id="faq-sound">
-            <details>
-                <summary>Wie mache ich die perfekte Audio-Aufnahme?</summary>
-                <div>
-                    <p>Am besten in einem ruhigen Raum. Halte das Handy-Mikrofon ca. 30cm entfernt und versuche, ein einzelnes, klares "Wuff" aufzunehmen. Eine Videoaufnahme funktioniert genauso gut!</p>
-                </div>
-            </details>
-            <details>
-                <summary>Was ist, wenn mein Hund schon verstorben ist?</summary>
-                <div>
-                    <p>Das tut uns sehr leid. Oft finden sich die schönsten Aufnahmen in alten Handy-Videos (z.B. vom Spielen oder aus dem Urlaub). Wir können die Tonspur aus jedem Video extrahieren, solange das Bellen zu hören ist.</p>
-                </div>
-            </details>
-            <details>
-                <summary>Wie funktioniert das mit dem QR-Code Poster?</summary>
-                <div>
-                    <p>Wir laden deine Audio-Datei sicher hoch und erstellen einen privaten Link. Dieser Link wird in einen QR-Code umgewandelt und dezent auf dein Poster gedruckt. Wenn du ihn mit deiner Handy-Kamera scannst, wird das Bellen sofort abgespielt.</p>
-                </div>
-            </details>
-        </div>
-
-        <div id="faq-astro">
-            <details>
-                <summary>Ich kenne das Geburtsdatum meines Hundes nicht.</summary>
-                <div>
-                    <p>Kein Problem! Nimm für den Astro-Check einfach das "Gotcha-Datum" – also den Tag, an dem er zu dir gekommen ist. Das ist der Beginn eurer gemeinsamen Reise und astrologisch genauso kraftvoll.</p>
-                </div>
-            </details>
-            <details>
-                <summary>Ist die Analyse wirklich "echt"?</summary>
-                <div>
-                    <p>Unser "Seelen-Check" ist ein liebevoller Algorithmus, der auf echter Numerologie und Sonnenzeichen-Kompatibilität basiert. Er errechnet ein deterministisches (kein zufälliges) Ergebnis. Die vollständige Analyse wird dann von Hand mit diesen Daten erstellt.</p>
-                </div>
-            </details>
-            <details>
-                <summary>Was steht im vollständigen "Karma Chart"?</summary>
-                <div>
-                    <p>Der vollständige Report (den du bestellst) ist eine wunderschöne PDF- oder Print-Datei. Sie enthält euren Archetypen, eure gemeinsamen Stärken, potenzielle Herausforderungen und eure spirituelle "Kraft-Farbe".</p>
-                </div>
-            </details>
-        </div>
-    </section>
-
-
-    <section id="order" class="fade-in-section">
-        <h2 id="order-title">Start Creation</h2>
-        <p id="order-desc" style="margin-bottom:2rem; opacity:0.7;">Lade deine Audio-Datei hoch.</p>
-        
-        <div style="background: white; padding:20px; border-radius:20px; max-width:800px; margin: 0 auto; min-height: 600px;">
-            <div id="form-container">
-                <iframe src="https://form.jotform.com/253195175200047" style="width:100%; height:600px; border:none;"></iframe>
-            </div>
-        </div>
-    </section>
-
-    <footer class="fade-in-section">SOULPAW &copy; 2024. All rights reserved.</footer>
-
-    <script>
-        let hasCalculated = false;
-        const formSoundLink = "https://form.jotform.com/253195175200047"; 
-        const formAstroLink = "https://form.jotform.com/253183756171056"; 
-
-        // --- NEUE START-LOGIK (Modal & Deep-Link) ---
-        document.addEventListener('DOMContentLoaded', () => {
-            const hash = window.location.hash;
-            if (hash === '#astro') {
-                switchMode('astro');
-            } else if (hash === '#sound') {
-                switchMode('sound');
-            } else {
-                // Kein Hash: Zeige das Modal
-                document.getElementById('welcome-modal').style.display = 'flex';
-                document.body.classList.add('modal-open');
-            }
-
-            // Intersection Observer für Scroll-Fade-In
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if(entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                    }
-                });
-            }, { threshold: 0.1 }); 
-
-            document.querySelectorAll('.fade-in-section').forEach(section => {
-                observer.observe(section);
-            });
-        });
-
-        // Neue Funktion, um Modal zu schließen
-        function switchModeAndCloseModal(mode) {
-            switchMode(mode);
-            document.getElementById('welcome-modal').style.display = 'none';
-            document.body.classList.remove('modal-open');
-        }
-
-
-        function switchMode(mode) {
-            const body = document.body;
-            const btns = document.querySelectorAll('.switch-btn');
-            const heroSound = document.getElementById('hero-sound');
-            const heroAstro = document.getElementById('hero-astro');
-            const sectionSound = document.getElementById('content-sound');
-            const sectionAstro = document.getElementById('content-astro');
-            const orderTitle = document.getElementById('order-title');
-            const orderDesc = document.getElementById('order-desc');
-            const formContainer = document.getElementById('form-container');
-
-            btns.forEach(b => b.classList.remove('active'));
-
-            if(mode === 'astro') {
-                body.classList.add('astro-mode');
-                btns[1].classList.add('active');
-                heroSound.style.display = 'none'; heroAstro.style.display = 'block';
-                sectionSound.classList.remove('active'); sectionAstro.classList.add('active');
-                orderTitle.innerText = "Unlock Cosmic Data";
-                orderDesc.innerText = "Bestelle jetzt deinen vollständigen Report.";
-                formContainer.innerHTML = `<iframe src="${formAstroLink}" style="width:100%; height:600px; border:none;"></iframe>`;
-                window.location.hash = 'astro';
-                
-            } else {
-                body.classList.remove('astro-mode');
-                btns[0].classList.add('active');
-                heroSound.style.display = 'block'; heroAstro.style.display = 'none';
-                sectionSound.classList.add('active'); sectionAstro.classList.remove('active');
-                orderTitle.innerText = "Create Soundwave";
-                orderDesc.innerText = "Lade deine Audio-Datei hoch.";
-                formContainer.innerHTML = `<iframe src="${formSoundLink}" style="width:100%; height:600px; border:none;"></iframe>`;
-                window.location.hash = 'sound';
-            }
-        }
-
-        function calculateDeterministicKarma() {
-            if(hasCalculated) return;
-
-            const hDate = document.getElementById('dateHuman').value;
-            const dDate = document.getElementById('dateDog').value;
-            const btn = document.getElementById('calcBtn');
-            const output = document.getElementById('tech-output');
-
-            if(!hDate || !dDate) {
-                alert("Bitte beide Geburtstage eingeben für die Synchronisation.");
-                return;
-            }
-
-            hasCalculated = true;
-            btn.disabled = true;
-            btn.style.opacity = "0.5";
-            btn.innerText = "Analysiere Sterne...";
-
-            const steps = ["Verbinde mit NASA Ephemeriden...", "Berechne Mondknoten...", "Synchronisiere Schwingung...", "Match gefunden."];
-            
-            // Tipp-Effekt
-            typewriterEffect(steps, output, () => {
-                showResults(hDate, dDate); 
-            });
-        }
-
-        function showResults(date1, date2) {
-            document.getElementById('calcBtn').style.display = 'none';
-            document.getElementById('tech-output').style.display = 'none';
-            
-            let combinedString = date1 + date2;
-            let hash = 0;
-            for (let i = 0; i < combinedString.length; i++) {
-                hash += combinedString.charCodeAt(i);
-            }
-
-            const minPercent = 88;
-            const percent = minPercent + (hash % (100 - minPercent));
-
-            const archetypes = [
-                "Der ewige Beschützer", "Die Zwillings-Seele", "Der treue Weggefährte",
-                "Der kosmische Spiegel", "Die heilende Energie"
-            ];
-            const archetype = archetypes[hash % archetypes.length];
-
-            document.getElementById('result-percent').innerText = percent + "% MATCH";
-            document.getElementById('result-archetype').innerText = "Spiritueller Archetyp: " + archetype;
-
-            // Share-Button Links aktualisieren
-            const shareText = `Wow! Mein Hund und ich sind ein ${percent}% Seelen-Match! 🐾✨ Unser Archetyp ist "${archetype}". Mach den Test auch bei SOULPAW!`;
-            document.getElementById('share-wa').href = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`;
-
-            const resultBox = document.getElementById('karma-result');
-            resultBox.style.display = 'block';
-            resultBox.style.animation = "fadeIn 1s";
-
-            const chartCard = document.getElementById('astro-product-card');
-            chartCard.classList.add('highlight-product');
-            chartCard.style.opacity = "1"; 
-            
-            resultBox.scrollIntoView({behavior: "smooth", block: "center"});
-        }
-        
-        // --- Tipp-Effekt Funktion ---
-        function typewriterEffect(steps, outputElement, callback) {
-            let stepIndex = 0;
-            let charIndex = 0;
-            outputElement.innerHTML = "> <span class='typing-cursor'></span>";
-
-            function typeStep() {
-                if(stepIndex >= steps.length) {
-                    callback(); 
-                    return;
-                }
-                
-                const currentStep = steps[stepIndex];
-                if (charIndex < currentStep.length) {
-                    outputElement.innerHTML = `> ${currentStep.substring(0, charIndex + 1)}<span class='typing-cursor'></span>`;
-                    charIndex++;
-                    setTimeout(typeStep, 30); // Tipp-Geschwindigkeit
-                } else {
-                    stepIndex++;
-                    charIndex = 0;
-                    setTimeout(() => {
-                        outputElement.innerHTML += "<br>"; 
-                        typeStep();
-                    }, 500); // Pause zwischen Zeilen
-                }
-            }
-            typeStep(); 
-        }
-
-        // --- Smooth Scroll für ALLE Anker-Links ---
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                
-                if(targetElement) {
-                    targetElement.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start' 
-                    });
-                }
-            });
-        });
-        
-        // --- Sternenstaub Maus-Cursor ---
-        document.addEventListener('mousemove', function(e) {
-            if (document.body.classList.contains('astro-mode')) {
-                let dust = document.createElement('div');
-                dust.className = 'stardust';
-                document.body.appendChild(dust);
-
-                dust.style.left = e.pageX + 'px';
-                dust.style.top = e.pageY + 'px';
-                
-                dust.style.transform = `translate(-50%, -50%) translate(${Math.random()*20-10}px, ${Math.random()*20-10}px)`;
-
-                setTimeout(() => {
-                    dust.remove();
-                }, 800);
-            }
-        });
-        
-    </script>
 </body>
 </html>
