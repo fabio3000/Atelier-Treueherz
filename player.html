@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>SOULPAW | Eternal Echo</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
@@ -27,7 +27,9 @@
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            overflow: hidden;
+            /* Verhindert Scrollen auf Handys für App-Feeling */
+            overflow: hidden; 
+            padding: 20px;
         }
 
         /* --- LOGO --- */
@@ -43,7 +45,7 @@
 
         /* --- PLAYER CARD --- */
         .player-card {
-            width: 90%;
+            width: 100%;
             max-width: 400px;
             background: var(--card-bg);
             border-radius: 30px;
@@ -54,11 +56,11 @@
             position: relative;
         }
 
-        /* --- COVER ART PLACEHOLDER (Die Welle) --- */
+        /* --- COVER ART (Das echte Bild) --- */
         .visual-container {
             width: 100%;
-            height: 200px;
-            background: #000;
+            height: 220px; /* Etwas höher für das Bild */
+            background: #050505;
             border-radius: 20px;
             margin-bottom: 30px;
             display: flex;
@@ -66,34 +68,25 @@
             justify-content: center;
             position: relative;
             border: 1px solid #222;
+            overflow: hidden;
+            padding: 20px; /* Abstand zum Rand */
         }
 
-        .paw-start {
-            position: absolute; left: 15%; 
-            color: var(--accent-color); 
-            font-size: 1.5rem; 
-            transform: rotate(-10deg);
-            opacity: 0.8;
+        /* Das Bild deines Designs */
+        #soundwave-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Wichtig: Zeigt das ganze Bild, ohne es zu verzerren */
+            filter: drop-shadow(0 0 10px rgba(155, 89, 182, 0.3)); /* Leichter Glow */
+            opacity: 0; /* Erst unsichtbar, wird eingeblendet */
+            transition: opacity 0.5s ease;
         }
 
-        .waveform-svg { width: 100%; height: 100%; margin-left: 5px; }
-        .waveform-path {
-            fill: none; 
-            stroke: var(--accent-color); 
-            stroke-width: 2px;
-            stroke-linecap: round; 
-            stroke-linejoin: round;
-            /* Standardmäßig pausiert! */
-            animation: barkAnimation 1.5s infinite ease-in-out;
-            animation-play-state: paused; 
-        }
-
-        @keyframes barkAnimation {
-            0% { d: path("M0,50 L30,50 L35,50 L40,50 L45,50 L50,50 L55,50 L60,50 L65,50 L70,50 L75,50 L80,50 L100,50"); }
-            10% { d: path("M0,50 L30,50 L35,20 L40,80 L45,10 L50,90 L55,30 L60,70 L65,40 L70,60 L75,50 L80,50 L100,50"); }
-            20% { d: path("M0,50 L30,50 L35,45 L40,55 L45,48 L50,52 L55,50 L60,50 L65,50 L70,50 L75,50 L80,50 L100,50"); }
-            40% { d: path("M0,50 L30,50 L35,50 L40,50 L45,50 L50,50 L55,50 L60,50 L65,50 L70,50 L75,50 L80,50 L100,50"); }
-            100% { d: path("M0,50 L30,50 L35,50 L40,50 L45,50 L50,50 L55,50 L60,50 L65,50 L70,50 L75,50 L80,50 L100,50"); }
+        /* Lade-Indikator, falls Bild groß ist */
+        .loading-spinner {
+            position: absolute;
+            color: var(--accent-color);
+            font-size: 2rem;
         }
 
         /* --- TEXT --- */
@@ -102,17 +95,17 @@
 
         /* --- CONTROLS --- */
         .play-btn {
-            width: 70px; height: 70px;
+            width: 80px; height: 80px;
             border-radius: 50%;
             background: var(--accent-color);
             border: none;
             color: white;
-            font-size: 1.5rem;
+            font-size: 2rem;
             cursor: pointer;
             box-shadow: 0 10px 30px rgba(155, 89, 182, 0.4);
             transition: 0.2s;
             display: inline-flex; align-items: center; justify-content: center;
-            padding-left: 5px; /* Optisch mittig */
+            padding-left: 5px; /* Optisch mittig für Play-Icon */
         }
         .play-btn:active { transform: scale(0.95); }
         
@@ -135,7 +128,7 @@
         }
         
         /* Error Message */
-        #error-msg { color: #ff4444; display: none; margin-top: 20px; }
+        #error-msg { color: #ff4444; display: none; margin-top: 20px; font-size: 0.9rem; }
 
     </style>
 </head>
@@ -145,10 +138,8 @@
 
     <div class="player-card">
         <div class="visual-container">
-            <i class="fas fa-paw paw-start"></i>
-            <svg class="waveform-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
-                <path id="wave-path" class="waveform-path" d="M0,50 L30,50 L35,50 L40,50 L45,50 L50,50 L55,50 L60,50 L65,50 L70,50 L75,50 L80,50 L100,50" />
-            </svg>
+            <i class="fas fa-spinner fa-spin loading-spinner" id="spinner"></i>
+            <img id="soundwave-image" alt="Deine Soundwelle">
         </div>
 
         <h2>The Eternal Echo</h2>
@@ -164,65 +155,92 @@
             <div class="progress-bar" id="progress-bar"></div>
         </div>
         
-        <div id="error-msg">Audio-Datei nicht gefunden.</div>
+        <div id="error-msg"></div>
     </div>
 
     <a href="index.html" class="footer-link">Create your own at SOULPAW</a>
 
     <script>
-        // 1. URL Parameter auslesen (?sound=NAME)
+        // 1. BEIDE Parameter auslesen: sound UND image
         const urlParams = new URLSearchParams(window.location.search);
         const soundFile = urlParams.get('sound');
+        const imageFile = urlParams.get('image');
         
         const audio = document.getElementById('audio-player');
         const playBtn = document.getElementById('play-btn');
         const progressBar = document.getElementById('progress-bar');
-        const wavePath = document.getElementById('wave-path');
+        const waveImage = document.getElementById('soundwave-image');
+        const spinner = document.getElementById('spinner');
         const icon = playBtn.querySelector('i');
+        const errorMsg = document.getElementById('error-msg');
 
         // 2. Audio laden
         if (soundFile) {
-            // Wir gehen davon aus, dass die Datei im Ordner "soundfiles" liegt
+            // Audio muss im Ordner 'soundfiles' liegen
             audio.src = "soundfiles/" + soundFile;
         } else {
-            document.getElementById('error-msg').style.display = 'block';
-            document.querySelector('p').innerText = "No Audio Selected";
+            showError("Audio-Datei nicht gefunden.");
         }
 
-        // 3. Play / Pause Logik
+        // 3. Bild laden (NEU)
+        if (imageFile) {
+            // Bild muss im Ordner 'images' liegen
+            waveImage.src = "images/" + imageFile;
+            // Wenn Bild geladen ist, Spinner weg und Bild einblenden
+            waveImage.onload = function() {
+                spinner.style.display = 'none';
+                waveImage.style.opacity = '1';
+            };
+            waveImage.onerror = function() {
+                 spinner.style.display = 'none';
+                 showError("Bild konnte nicht geladen werden.");
+            }
+        } else {
+            // Kein Bild angegeben? Zeige Platzhalter oder Fehler
+            spinner.style.display = 'none';
+            // Optional: Ein Standard-Bild anzeigen, wenn keins im Link ist
+            // waveImage.src = "images/default-wave.png"; 
+            // waveImage.style.opacity = '1';
+        }
+
+        function showError(msg) {
+            errorMsg.innerText = msg;
+            errorMsg.style.display = 'block';
+        }
+
+        // 4. Play / Pause Logik
         function togglePlay() {
+            if (!soundFile) return;
+
             if (audio.paused) {
                 audio.play().then(() => {
                     playBtn.classList.add('playing');
                     icon.classList.remove('fa-play');
                     icon.classList.add('fa-pause');
-                    // Animation starten
-                    wavePath.style.animationPlayState = 'running';
                 }).catch(e => {
                     console.error(e);
-                    alert("Datei konnte nicht abgespielt werden. Prüfe den Dateinamen.");
+                    alert("Konnte Audio nicht abspielen. Bitte tippe erneut.");
                 });
             } else {
                 audio.pause();
                 playBtn.classList.remove('playing');
                 icon.classList.remove('fa-pause');
                 icon.classList.add('fa-play');
-                // Animation stoppen
-                wavePath.style.animationPlayState = 'paused';
             }
         }
 
-        // 4. Fortschrittsbalken & Ende
+        // 5. Fortschrittsbalken & Ende
         audio.addEventListener('timeupdate', () => {
-            const percent = (audio.currentTime / audio.duration) * 100;
-            progressBar.style.width = percent + "%";
+            if (audio.duration) {
+                const percent = (audio.currentTime / audio.duration) * 100;
+                progressBar.style.width = percent + "%";
+            }
         });
 
         audio.addEventListener('ended', () => {
             playBtn.classList.remove('playing');
             icon.classList.remove('fa-pause');
             icon.classList.add('fa-play');
-            wavePath.style.animationPlayState = 'paused';
             progressBar.style.width = "0%";
         });
 
