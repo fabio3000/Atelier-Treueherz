@@ -12,7 +12,7 @@
         :root {
             --bg-color: #0a0a0a;
             --text-color: #f0f0f0;
-            --accent-color: #9b59b6; /* Das Sound-Lila */
+            --accent-color: #9b59b6; /* Dein Lila */
             --card-bg: #141414;
         }
 
@@ -27,12 +27,10 @@
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            /* Verhindert Scrollen auf Handys für App-Feeling */
             overflow: hidden; 
             padding: 20px;
         }
 
-        /* --- LOGO --- */
         .brand {
             position: absolute; top: 30px;
             font-family: 'Cinzel', serif;
@@ -43,7 +41,6 @@
             text-shadow: 0 0 15px rgba(155, 89, 182, 0.5);
         }
 
-        /* --- PLAYER CARD --- */
         .player-card {
             width: 100%;
             max-width: 400px;
@@ -56,10 +53,10 @@
             position: relative;
         }
 
-        /* --- COVER ART (Das echte Bild) --- */
+        /* --- VISUALIZER --- */
         .visual-container {
             width: 100%;
-            height: 220px; /* Etwas höher für das Bild */
+            height: 220px;
             background: #050505;
             border-radius: 20px;
             margin-bottom: 30px;
@@ -69,50 +66,55 @@
             position: relative;
             border: 1px solid #222;
             overflow: hidden;
-            padding: 20px; /* Abstand zum Rand */
+            padding: 20px;
         }
 
-        /* Das Bild deines Designs */
-        #soundwave-image {
+        /* DER NEUE LILA EFFEKT */
+        .colored-wave {
             width: 100%;
             height: 100%;
-            object-fit: contain; /* Wichtig: Zeigt das ganze Bild, ohne es zu verzerren */
-            filter: drop-shadow(0 0 10px rgba(155, 89, 182, 0.3)); /* Leichter Glow */
-            opacity: 0; /* Erst unsichtbar, wird eingeblendet */
-            transition: opacity 0.5s ease;
+            
+            /* Die Farbe der Linie (kommt vom CSS Variable) */
+            background-color: var(--accent-color);
+            
+            /* Hier wird das Bild als Maske geladen (via JS) */
+            -webkit-mask-size: contain;
+            -webkit-mask-repeat: no-repeat;
+            -webkit-mask-position: center;
+            mask-size: contain;
+            mask-repeat: no-repeat;
+            mask-position: center;
+
+            opacity: 0; /* Wird eingeblendet wenn fertig geladen */
+            transition: opacity 0.5s ease, transform 0.2s ease;
         }
 
-        /* Lade-Indikator, falls Bild groß ist */
+        /* Kleine Animation wenn Musik spielt */
+        .playing .colored-wave {
+            filter: drop-shadow(0 0 8px var(--accent-color)); /* Glow Effekt */
+            transform: scale(1.02);
+        }
+
         .loading-spinner {
             position: absolute;
             color: var(--accent-color);
             font-size: 2rem;
         }
 
-        /* --- TEXT --- */
         h2 { font-family: 'Cinzel', serif; font-size: 1.5rem; margin-bottom: 5px; }
         p { color: #888; font-size: 0.9rem; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 2px; }
 
-        /* --- CONTROLS --- */
         .play-btn {
-            width: 80px; height: 80px;
-            border-radius: 50%;
-            background: var(--accent-color);
-            border: none;
-            color: white;
-            font-size: 2rem;
-            cursor: pointer;
+            width: 80px; height: 80px; border-radius: 50%;
+            background: var(--accent-color); border: none; color: white;
+            font-size: 2rem; cursor: pointer;
             box-shadow: 0 10px 30px rgba(155, 89, 182, 0.4);
-            transition: 0.2s;
-            display: inline-flex; align-items: center; justify-content: center;
-            padding-left: 5px; /* Optisch mittig für Play-Icon */
+            transition: 0.2s; display: inline-flex; align-items: center; justify-content: center;
+            padding-left: 5px;
         }
         .play-btn:active { transform: scale(0.95); }
-        
-        /* Wenn Pause ist (Icon wechseln) */
         .play-btn.playing { padding-left: 0; background: white; color: var(--accent-color); }
 
-        /* --- PROGRESS BAR --- */
         .progress-container {
             width: 100%; height: 4px; background: #333;
             border-radius: 2px; margin-top: 30px; overflow: hidden;
@@ -122,24 +124,18 @@
             transition: width 0.1s linear;
         }
 
-        /* --- FOOTER --- */
-        .footer-link {
-            margin-top: 40px; opacity: 0.5; font-size: 0.8rem; color: white; text-decoration: none;
-        }
-        
-        /* Error Message */
+        .footer-link { margin-top: 40px; opacity: 0.5; font-size: 0.8rem; color: white; text-decoration: none; }
         #error-msg { color: #ff4444; display: none; margin-top: 20px; font-size: 0.9rem; }
-
     </style>
 </head>
 <body>
 
     <div class="brand">SOULPAW</div>
 
-    <div class="player-card">
+    <div class="player-card" id="main-card">
         <div class="visual-container">
             <i class="fas fa-spinner fa-spin loading-spinner" id="spinner"></i>
-            <img id="soundwave-image" alt="Deine Soundwelle">
+            <div id="soundwave-image" class="colored-wave"></div>
         </div>
 
         <h2>The Eternal Echo</h2>
@@ -161,7 +157,6 @@
     <a href="index.html" class="footer-link">Create your own at SOULPAW</a>
 
     <script>
-        // 1. BEIDE Parameter auslesen: sound UND image
         const urlParams = new URLSearchParams(window.location.search);
         const soundFile = urlParams.get('sound');
         const imageFile = urlParams.get('image');
@@ -169,38 +164,39 @@
         const audio = document.getElementById('audio-player');
         const playBtn = document.getElementById('play-btn');
         const progressBar = document.getElementById('progress-bar');
-        const waveImage = document.getElementById('soundwave-image');
+        const waveDiv = document.getElementById('soundwave-image'); // Ist jetzt ein DIV
         const spinner = document.getElementById('spinner');
         const icon = playBtn.querySelector('i');
         const errorMsg = document.getElementById('error-msg');
+        const card = document.getElementById('main-card');
 
-        // 2. Audio laden
+        // 1. Audio laden
         if (soundFile) {
-            // Audio muss im Ordner 'soundfiles' liegen
             audio.src = "soundfiles/" + soundFile;
         } else {
-            showError("Audio-Datei nicht gefunden.");
+            showError("Audio nicht gefunden.");
         }
 
-        // 3. Bild laden (NEU)
+        // 2. Bild laden (als Maske)
         if (imageFile) {
-            // Bild muss im Ordner 'images' liegen
-            waveImage.src = "images/" + imageFile;
-            // Wenn Bild geladen ist, Spinner weg und Bild einblenden
-            waveImage.onload = function() {
+            // Trick: Wir laden das Bild erst im Hintergrund, um sicherzugehen dass es da ist
+            const tempImg = new Image();
+            tempImg.src = "images/" + imageFile;
+            
+            tempImg.onload = function() {
                 spinner.style.display = 'none';
-                waveImage.style.opacity = '1';
+                // Setze das Bild als CSS Maske
+                waveDiv.style.webkitMaskImage = `url('images/${imageFile}')`;
+                waveDiv.style.maskImage = `url('images/${imageFile}')`;
+                waveDiv.style.opacity = '1';
             };
-            waveImage.onerror = function() {
-                 spinner.style.display = 'none';
-                 showError("Bild konnte nicht geladen werden.");
-            }
+            
+            tempImg.onerror = function() {
+                spinner.style.display = 'none';
+                showError("Bild-Design nicht gefunden.");
+            };
         } else {
-            // Kein Bild angegeben? Zeige Platzhalter oder Fehler
             spinner.style.display = 'none';
-            // Optional: Ein Standard-Bild anzeigen, wenn keins im Link ist
-            // waveImage.src = "images/default-wave.png"; 
-            // waveImage.style.opacity = '1';
         }
 
         function showError(msg) {
@@ -208,28 +204,28 @@
             errorMsg.style.display = 'block';
         }
 
-        // 4. Play / Pause Logik
         function togglePlay() {
             if (!soundFile) return;
 
             if (audio.paused) {
                 audio.play().then(() => {
                     playBtn.classList.add('playing');
+                    card.classList.add('playing'); // Startet den Glow Effekt
                     icon.classList.remove('fa-play');
                     icon.classList.add('fa-pause');
                 }).catch(e => {
                     console.error(e);
-                    alert("Konnte Audio nicht abspielen. Bitte tippe erneut.");
+                    alert("Konnte Audio nicht abspielen.");
                 });
             } else {
                 audio.pause();
                 playBtn.classList.remove('playing');
+                card.classList.remove('playing');
                 icon.classList.remove('fa-pause');
                 icon.classList.add('fa-play');
             }
         }
 
-        // 5. Fortschrittsbalken & Ende
         audio.addEventListener('timeupdate', () => {
             if (audio.duration) {
                 const percent = (audio.currentTime / audio.duration) * 100;
@@ -239,6 +235,7 @@
 
         audio.addEventListener('ended', () => {
             playBtn.classList.remove('playing');
+            card.classList.remove('playing');
             icon.classList.remove('fa-pause');
             icon.classList.add('fa-play');
             progressBar.style.width = "0%";
