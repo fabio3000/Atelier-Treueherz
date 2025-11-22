@@ -25,28 +25,32 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: center; /* Zentriert vertikal */
             min-height: 100vh;
-            overflow: hidden; 
+            /* Erlaubt Scrollen auf sehr kleinen Handys, falls nötig */
+            overflow-y: auto; 
             padding: 20px;
         }
 
+        /* --- LOGO (FIXED: Relative Position damit nichts überlappt) --- */
         .brand {
-            position: absolute; top: 30px;
+            position: relative; /* WICHTIG: Nicht mehr absolute */
+            margin-bottom: 20px; /* Abstand zur Karte */
             font-family: 'Cinzel', serif;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             font-weight: 700;
             letter-spacing: 2px;
             color: white;
             text-shadow: 0 0 15px rgba(155, 89, 182, 0.5);
+            z-index: 10;
         }
 
         .player-card {
             width: 100%;
-            max-width: 400px;
+            max-width: 380px; /* Etwas schmaler für Eleganz */
             background: var(--card-bg);
             border-radius: 30px;
-            padding: 40px 20px;
+            padding: 30px 20px; /* Weniger Padding oben/unten */
             text-align: center;
             box-shadow: 0 20px 60px rgba(0,0,0,0.5);
             border: 1px solid rgba(255,255,255,0.05);
@@ -59,39 +63,39 @@
             border-color: rgba(155, 89, 182, 0.3);
         }
 
-        /* --- VISUALIZER (Optimiert: Hoch & Gezoomt) --- */
+        /* --- VISUALIZER (FIXED: Kleiner & Passt rein) --- */
         .visual-container {
             width: 100%;
-            height: 260px; /* Höher für bessere Sichtbarkeit */
+            height: 200px; /* Reduziert von 260px auf 200px */
             background: #050505;
             border-radius: 20px;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
             border: 1px solid #222;
-            overflow: hidden; /* Wichtig für Zoom */
-            padding: 0; /* Kein Innenabstand */
+            overflow: hidden;
+            padding: 10px; /* Abstand zum Rand damit Welle atmen kann */
         }
 
         #processed-canvas {
             width: 100%;
             height: 100%;
             
-            /* Füllt den Bereich komplett aus */
-            object-fit: cover; 
+            /* WICHTIG: 'contain' zeigt das GANZE Bild, nichts wird abgeschnitten */
+            object-fit: contain; 
             
             opacity: 0;
             transition: opacity 0.5s ease, transform 0.2s ease;
-            filter: drop-shadow(0 0 8px rgba(155, 89, 182, 0.8));
+            filter: drop-shadow(0 0 5px rgba(155, 89, 182, 0.6));
             
-            /* DER ZOOM-TRICK (1.4x) */
-            transform: scale(1.4);
+            /* Kein aggressiver Zoom mehr, damit es scharf bleibt */
+            transform: scale(1.0); 
         }
         
         .playing #processed-canvas { 
-            transform: scale(1.45); /* Pulsieren beim Abspielen */
+            transform: scale(1.05); /* Nur ganz leichtes Pulsieren */
         }
 
         .loading-spinner {
@@ -100,13 +104,13 @@
             font-size: 2rem;
         }
 
-        h2 { font-family: 'Cinzel', serif; font-size: 1.5rem; margin-bottom: 5px; text-transform: capitalize; }
-        p { color: #888; font-size: 0.9rem; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 2px; }
+        h2 { font-family: 'Cinzel', serif; font-size: 1.4rem; margin-bottom: 5px; text-transform: capitalize; }
+        p { color: #888; font-size: 0.8rem; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 2px; }
 
         .play-btn {
-            width: 80px; height: 80px; border-radius: 50%;
+            width: 70px; height: 70px; border-radius: 50%;
             background: var(--accent-color); border: none; color: white;
-            font-size: 2rem; cursor: pointer;
+            font-size: 1.8rem; cursor: pointer;
             box-shadow: 0 10px 30px rgba(155, 89, 182, 0.4);
             transition: 0.2s; display: inline-flex; align-items: center; justify-content: center;
             padding-left: 5px;
@@ -116,14 +120,14 @@
 
         .progress-container {
             width: 100%; height: 4px; background: #333;
-            border-radius: 2px; margin-top: 30px; overflow: hidden;
+            border-radius: 2px; margin-top: 25px; overflow: hidden;
         }
         .progress-bar {
             width: 0%; height: 100%; background: var(--accent-color);
             transition: width 0.1s linear;
         }
 
-        .footer-link { margin-top: 40px; opacity: 0.5; font-size: 0.8rem; color: white; text-decoration: none; }
+        .footer-link { margin-top: 30px; opacity: 0.5; font-size: 0.75rem; color: white; text-decoration: none; }
         #error-msg { color: #ff4444; display: none; margin-top: 20px; font-size: 0.9rem; }
     </style>
 </head>
@@ -175,12 +179,9 @@
             if (!filename) return;
             let name = filename.substring(0, filename.lastIndexOf('.'));
             name = decodeURIComponent(name);
-            
-            // Prüfen ob generisch
             const isGeneric = /^(AUDIO|IMG|DSC|REC|WhatsApp|Video|Sound)|\d{4}-\d{2}-\d{2}|^\d+$/i.test(name);
 
             if (!isGeneric && name.length > 1) {
-                // Schneide ab beim ersten Trennzeichen
                 let cleanName = name.split(/[_ -]/)[0]; 
                 cleanName = cleanName.charAt(0).toUpperCase() + cleanName.slice(1);
                 document.getElementById('player-title').innerText = cleanName;
@@ -195,7 +196,7 @@
             showError("Audio nicht gefunden.");
         }
 
-        // 2. Bild (Auto-Processing: Weiß->Transparent, Schwarz->Lila)
+        // 2. Bild (Auto-Processing)
         if (imageFile) {
             const img = new Image();
             img.crossOrigin = "Anonymous"; 
@@ -219,7 +220,7 @@
                     if (brightness > 200) {
                         data[i + 3] = 0; // Weiß -> Transparent
                     } else {
-                        // Schwarz -> Lila (#9b59b6)
+                        // Schwarz -> Lila
                         data[i] = 155; data[i + 1] = 89; data[i + 2] = 182;
                         if(data[i+3] > 0) data[i+3] = 255; 
                     }
@@ -230,7 +231,7 @@
             
             img.onerror = function() {
                 spinner.style.display = 'none';
-                showError("Bild konnte nicht geladen werden.");
+                showError("Bildfehler.");
             };
         } else {
             spinner.style.display = 'none';
