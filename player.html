@@ -12,7 +12,7 @@
         :root {
             --bg-color: #0a0a0a;
             --text-color: #f0f0f0;
-            --accent-color: #9b59b6; /* Dein Lila */
+            --accent-color: #9b59b6; /* Lila */
             --card-bg: #141414;
         }
 
@@ -51,6 +51,13 @@
             box-shadow: 0 20px 60px rgba(0,0,0,0.5);
             border: 1px solid rgba(255,255,255,0.05);
             position: relative;
+            transition: box-shadow 0.3s ease;
+        }
+        
+        /* Glow Effekt beim Abspielen */
+        .player-card.playing {
+            box-shadow: 0 20px 60px rgba(155, 89, 182, 0.3);
+            border-color: rgba(155, 89, 182, 0.3);
         }
 
         /* --- VISUALIZER --- */
@@ -66,32 +73,21 @@
             position: relative;
             border: 1px solid #222;
             overflow: hidden;
-            padding: 20px;
+            padding: 10px;
         }
 
-        /* DER NEUE LILA EFFEKT */
-        .colored-wave {
-            width: 100%;
-            height: 100%;
-            
-            /* Die Farbe der Linie (kommt vom CSS Variable) */
-            background-color: var(--accent-color);
-            
-            /* Hier wird das Bild als Maske geladen (via JS) */
-            -webkit-mask-size: contain;
-            -webkit-mask-repeat: no-repeat;
-            -webkit-mask-position: center;
-            mask-size: contain;
-            mask-repeat: no-repeat;
-            mask-position: center;
-
-            opacity: 0; /* Wird eingeblendet wenn fertig geladen */
+        /* Das Canvas Element (Hier passiert die Magie) */
+        #processed-canvas {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            opacity: 0;
             transition: opacity 0.5s ease, transform 0.2s ease;
+            /* Filter für noch mehr Glow */
+            filter: drop-shadow(0 0 5px rgba(155, 89, 182, 0.5));
         }
-
-        /* Kleine Animation wenn Musik spielt */
-        .playing .colored-wave {
-            filter: drop-shadow(0 0 8px var(--accent-color)); /* Glow Effekt */
+        
+        .playing #processed-canvas {
             transform: scale(1.02);
         }
 
@@ -135,7 +131,7 @@
     <div class="player-card" id="main-card">
         <div class="visual-container">
             <i class="fas fa-spinner fa-spin loading-spinner" id="spinner"></i>
-            <div id="soundwave-image" class="colored-wave"></div>
+            <canvas id="processed-canvas"></canvas>
         </div>
 
         <h2>The Eternal Echo</h2>
@@ -164,7 +160,8 @@
         const audio = document.getElementById('audio-player');
         const playBtn = document.getElementById('play-btn');
         const progressBar = document.getElementById('progress-bar');
-        const waveDiv = document.getElementById('soundwave-image'); // Ist jetzt ein DIV
+        const canvas = document.getElementById('processed-canvas');
+        const ctx = canvas.getContext('2d');
         const spinner = document.getElementById('spinner');
         const icon = playBtn.querySelector('i');
         const errorMsg = document.getElementById('error-msg');
@@ -177,23 +174,58 @@
             showError("Audio nicht gefunden.");
         }
 
-        // 2. Bild laden (als Maske)
+        // 2. Bild laden und AUTOMATISCH bearbeiten (Weiß -> Transparent, Schwarz -> Lila)
         if (imageFile) {
-            // Trick: Wir laden das Bild erst im Hintergrund, um sicherzugehen dass es da ist
-            const tempImg = new Image();
-            tempImg.src = "images/" + imageFile;
+            const img = new Image();
+            // Wichtig: crossOrigin erlaubt Manipulation, falls Bild von extern kommt (hier lokal egal)
+            img.crossOrigin = "Anonymous"; 
+            img.src = "images/" + imageFile;
             
-            tempImg.onload = function() {
+            img.onload = function() {
                 spinner.style.display = 'none';
-                // Setze das Bild als CSS Maske
-                waveDiv.style.webkitMaskImage = `url('images/${imageFile}')`;
-                waveDiv.style.maskImage = `url('images/${imageFile}')`;
-                waveDiv.style.opacity = '1';
+                
+                // Canvas Größe an Bild anpassen
+                canvas.width = img.width;
+                canvas.height = img.height;
+                
+                // Bild auf Canvas zeichnen
+                ctx.drawImage(img, 0, 0);
+                
+                // Pixel-Daten holen
+                const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                const data = imageData.data;
+                
+                // Jeden Pixel durchgehen
+                for (let i = 0; i < data.length; i += 4) {
+                    const r = data[i];
+                    const g = data[i + 1];
+                    const b = data[i + 2];
+                    
+                    // Helligkeit berechnen (Durchschnitt)
+                    const brightness = (r + g + b) / 3;
+                    
+                    if (brightness > 200) {
+                        // Wenn HELL (Weißer Hintergrund): Mache komplett transparent
+                        data[i + 3] = 0; 
+                    } else {
+                        // Wenn DUNKEL (Die Linie): Färbe Lila (#9b59b6)
+                        // RGB für #9b59b6 ist: 155, 89, 182
+                        data[i] = 155;     // Red
+                        data[i + 1] = 89;  // Green
+                        data[i + 2] = 182; // Blue
+                        // Alpha (Sichtbarkeit) lassen wir, oder setzen auf voll (255)
+                        if(data[i+3] > 0) data[i+3] = 255; 
+                    }
+                }
+                
+                // Bearbeitetes Bild zurück aufs Canvas schreiben
+                ctx.putImageData(imageData, 0, 0);
+                canvas.style.opacity = '1';
             };
             
-            tempImg.onerror = function() {
+            img.onerror = function() {
                 spinner.style.display = 'none';
-                showError("Bild-Design nicht gefunden.");
+                showError("Bild konnte nicht verarbeitet werden.");
             };
         } else {
             spinner.style.display = 'none';
@@ -210,7 +242,7 @@
             if (audio.paused) {
                 audio.play().then(() => {
                     playBtn.classList.add('playing');
-                    card.classList.add('playing'); // Startet den Glow Effekt
+                    card.classList.add('playing');
                     icon.classList.remove('fa-play');
                     icon.classList.add('fa-pause');
                 }).catch(e => {
