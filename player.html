@@ -92,7 +92,6 @@
             font-size: 2rem;
         }
 
-        /* IDs hinzugefügt für JS Zugriff */
         h2 { font-family: 'Cinzel', serif; font-size: 1.5rem; margin-bottom: 5px; text-transform: capitalize; }
         p { color: #888; font-size: 0.9rem; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 2px; }
 
@@ -163,33 +162,32 @@
         const errorMsg = document.getElementById('error-msg');
         const card = document.getElementById('main-card');
 
-        // --- NEUE FUNKTION: NAMEN AUS DATEI ERKENNEN ---
+        // --- INTELLIGENTE NAMENSERKENNUNG ---
         function updateNameFromFilename(filename) {
             if (!filename) return;
 
-            // Dateiendung entfernen (z.B. .m4a)
+            // 1. Dateiendung entfernen (alles nach dem letzten Punkt weg)
             let name = filename.substring(0, filename.lastIndexOf('.'));
-            
-            // Decode URI Component falls Leerzeichen als %20 kommen
             name = decodeURIComponent(name);
 
-            // Regex Prüfung: Ist es ein generischer System-Name?
-            // Prüft auf: Startet mit AUDIO, IMG, Zahlen, Datumsmuster (YYYY-MM-DD)
+            // 2. Prüfen: Ist es ein generischer Name? (Startet mit AUDIO, IMG, Zahlen, Datum)
+            // Wenn JA, brechen wir ab und lassen den Standard-Titel stehen.
             const isGeneric = /^(AUDIO|IMG|DSC|REC|WhatsApp|Video|Sound)|\d{4}-\d{2}-\d{2}|^\d+$/i.test(name);
 
             if (!isGeneric && name.length > 1) {
-                // Es ist wahrscheinlich ein echter Name!
-                
-                // Unterstriche/Bindestriche durch Leerzeichen ersetzen
-                name = name.replace(/[-_]/g, ' ');
-                
-                // Setze den Titel auf den Namen
-                document.getElementById('player-title').innerText = name;
-                document.getElementById('player-subtitle').innerText = "The Eternal Echo";
+                // 3. Es ist ein echter Name! Wir wollen nur den ersten Teil.
+                // Trenne bei Unterstrich (_), Bindestrich (-) oder Leerzeichen
+                let cleanName = name.split(/[_ -]/)[0];
+
+                // (Optional) Ersten Buchstaben groß machen, falls kleingeschrieben
+                cleanName = cleanName.charAt(0).toUpperCase() + cleanName.slice(1);
+
+                // Titel setzen
+                document.getElementById('player-title').innerText = cleanName;
             }
         }
 
-        // 1. Audio laden & Name prüfen
+        // 1. Audio laden
         if (soundFile) {
             audio.src = "soundfiles/" + soundFile;
             // Versuche Name aus Audio-Datei zu lesen
@@ -198,7 +196,7 @@
             showError("Audio nicht gefunden.");
         }
 
-        // 2. Bild laden & Bearbeiten (Weiß -> Transparent, Schwarz -> Lila)
+        // 2. Bild laden & Bearbeiten
         if (imageFile) {
             const img = new Image();
             img.crossOrigin = "Anonymous"; 
@@ -220,9 +218,8 @@
                     const brightness = (r + g + b) / 3;
                     
                     if (brightness > 200) {
-                        data[i + 3] = 0; // Weiß -> Transparent
+                        data[i + 3] = 0; 
                     } else {
-                        // Schwarz -> Lila (#9b59b6)
                         data[i] = 155; data[i + 1] = 89; data[i + 2] = 182;
                         if(data[i+3] > 0) data[i+3] = 255; 
                     }
